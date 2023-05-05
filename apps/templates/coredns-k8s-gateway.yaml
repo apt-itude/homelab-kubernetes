@@ -18,10 +18,6 @@ spec:
           value: v0.3.4
         - name: domain
           value: "{{ .Values.rootDomain }}"
-        - name: service.type
-          value: NodePort
-        - name: service.nodePort
-          value: "30053"
   destination:
     namespace: coredns-k8s-gateway
     server: "{{ .Values.spec.destination.server }}"
