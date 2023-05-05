@@ -14,3 +14,6 @@ spec:
   destination:
     namespace: test
     server: "{{ .Values.spec.destination.server }}"
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
