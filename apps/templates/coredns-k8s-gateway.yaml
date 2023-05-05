@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coredns-k8s-gateway
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://ori-edge.github.io/k8s_gateway/
+    chart: k8s-gateway
+    targetRevision: 2.0.3
+    helm:
+      releaseName: k8s-gateway
+      parameters:
+        - name: domain
+          value: "{{ .Values.rootDomain }}"
+        - name: image.tag
+          value: v0.3.4
+  destination:
+    namespace: coredns-k8s-gateway
+    server: "{{ .Values.spec.destination.server }}"
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
