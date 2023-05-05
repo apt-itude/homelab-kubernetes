@@ -38,7 +38,8 @@ ingress:
   className: ""
   annotations: {}
   hosts:
-    - paths:
+    - host: test.lucyscrib.com
+      paths:
         - path: /
           pathType: ImplementationSpecific
   tls: []
