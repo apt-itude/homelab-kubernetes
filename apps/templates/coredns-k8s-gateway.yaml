@@ -14,10 +14,12 @@ spec:
     helm:
       releaseName: k8s-gateway
       parameters:
-        - name: domain
-          value: "{{ .Values.rootDomain }}"
         - name: image.tag
           value: v0.3.4
+        - name: domain
+          value: "{{ .Values.rootDomain }}"
+        - name: service.type
+          value: NodePort
   destination:
     namespace: coredns-k8s-gateway
     server: "{{ .Values.spec.destination.server }}"
