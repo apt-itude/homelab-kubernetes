@@ -8,16 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://ori-edge.github.io/k8s_gateway/
-    chart: k8s-gateway
-    targetRevision: 2.0.3
-    helm:
-      releaseName: k8s-gateway
-      parameters:
-        - name: image.tag
-          value: v0.3.4
-        - name: domain
-          value: "{{ .Values.rootDomain }}"
+    path: coredns-k8s-gateway
+    repoURL: "{{ .Values.spec.source.repoURL }}"
+    targetRevision: "{{ .Values.spec.source.targetRevision }}"
   destination:
     namespace: coredns-k8s-gateway
     server: "{{ .Values.spec.destination.server }}"
