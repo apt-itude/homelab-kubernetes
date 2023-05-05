@@ -4,3 +4,5 @@ spec:
   source:
     repoURL: https://github.com/apt-itude/homelab-kubernetes
     targetRevision: HEAD
+
+rootDomain: lucyscrib.com
