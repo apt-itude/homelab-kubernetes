@@ -21,7 +21,7 @@ spec:
         - name: service.type
           value: NodePort
         - name: service.nodePort
-          value: 53
+          value: "53"
   destination:
     namespace: coredns-k8s-gateway
     server: "{{ .Values.spec.destination.server }}"
