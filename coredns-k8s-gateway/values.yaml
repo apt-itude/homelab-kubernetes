@@ -4,6 +4,6 @@ k8s-gateway:
 
   service:
     annotations:
-      metallb.universe.tf/loadBalancerIPs: 192.168.1.211
+      metallb.universe.tf/loadBalancerIPs: 192.168.1.253
 
   domain: lucyscrib.com
