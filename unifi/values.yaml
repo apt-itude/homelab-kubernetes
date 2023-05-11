@@ -2,6 +2,8 @@ unifi:
   ingress:
     main:
       enabled: true
+      annotations:
+        ingress.kubernetes.io/protocol: https
       hosts:
         - host: unifi.lucyscrib.com
           paths:
