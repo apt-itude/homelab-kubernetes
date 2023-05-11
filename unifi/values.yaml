@@ -1,0 +1,15 @@
+unifi:
+  ingress:
+    main:
+      enabled: true
+      hosts:
+        - host: unifi.lucyscrib.com
+          paths:
+            - path: /
+              pathType: Prefix
+
+  mongodb:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 2Gi
