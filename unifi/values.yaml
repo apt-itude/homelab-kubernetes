@@ -6,9 +6,7 @@ unifi:
         - host: unifi.lucyscrib.com
           paths:
             - path: /
-              pathType: ImplementationSpecific
-              service:
-                port: 8080
+              pathType: Prefix
 
   mongodb:
     enabled: true
