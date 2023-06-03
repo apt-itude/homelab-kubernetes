@@ -37,9 +37,9 @@ unifi:
             - path: /
               pathType: Prefix
 
-    persistence:
-      data:
-        enabled: true
+  persistence:
+    data:
+      enabled: true
 
   mongodb:
     enabled: true
