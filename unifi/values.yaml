@@ -1,6 +1,7 @@
 unifi:
   service:
     main:
+      type: LoadBalancer
       ports:
         stun:
           enabled: false
