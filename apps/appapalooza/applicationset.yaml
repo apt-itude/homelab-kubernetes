@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appapalooza
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/apt-itude/homelab-kubernetes.git
+        revision: HEAD
+        files:
+          - path: apps/appapalooza/subapps/*/config.yaml
+  template:
+    metadata:
+      name: "{{ path.basenameNormalized }}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/apt-itude/homelab-kubernetes.git
+        targetRevision: HEAD
+        path: apps/test
+        helm:
+          valueFiles: "{{ valuesFiles }}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{ path.basenameNormalized }}"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
