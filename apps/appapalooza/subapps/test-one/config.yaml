@@ -1,3 +1,0 @@
-valuesFiles:
-  - values-disable-ingress.yaml
-  - values-add-annotation.yaml
