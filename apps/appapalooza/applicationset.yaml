@@ -20,7 +20,7 @@ spec:
         targetRevision: HEAD
         path: apps/test
         helm:
-          valueFiles: "{{ valuesFiles }}"
+          valueFiles: {{ valuesFiles }}
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{ path.basenameNormalized }}"
