@@ -10,11 +10,16 @@ unifi:
       enabled: true
       annotations:
         ingress.kubernetes.io/protocol: https
+        cert-manager.io/cluster-issuer: lucys-crib
       hosts:
         - host: unifi.lucyscrib.com
           paths:
             - path: /
               pathType: Prefix
+      tls:
+        - hosts:
+            - unifi.lucyscrib.com
+          secretName: unifi-lucys-crib-cert
 
   persistence:
     data:
