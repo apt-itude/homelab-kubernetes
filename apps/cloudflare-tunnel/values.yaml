@@ -1,0 +1,4 @@
+cloudflare-tunnel:
+  cloudflare:
+    tunnelName: lucyscrib
+    secretName: lucyscrib-tunnel-creds
