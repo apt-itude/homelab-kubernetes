@@ -3,6 +3,11 @@ cloudflare:
     secretName: "lucyscrib-tunnel-token"
     secretKey: "credential"
 
+  enableWarp: false
+
+  ingress:
+    unifi.lucyscrib.com: unifi.unifi.svc.cluster.local
+
 replicaCount: 2
 
 image:
