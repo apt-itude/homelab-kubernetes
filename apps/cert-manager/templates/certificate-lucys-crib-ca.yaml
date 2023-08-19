@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lucys-crib-ca
+spec:
+  isCA: true
+  commonName: lucys-crib-ca
+  secretName: lucys-crib-ca-cert
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    kind: ClusterIssuer
+    name: lucys-crib-root
