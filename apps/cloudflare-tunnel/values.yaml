@@ -1,4 +1,34 @@
-cloudflare-tunnel:
-  cloudflare:
-    tunnelName: lucyscrib
-    secretName: lucyscrib-tunnel-creds
+cloudflare:
+  tunnelToken:
+    secretName: "lucyscrib-tunnel-token"
+    secretKey: "credential"
+
+replicaCount: 2
+
+image:
+  repository: cloudflare/cloudflared
+  pullPolicy: IfNotPresent
+  tag: "2023.7.3"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
