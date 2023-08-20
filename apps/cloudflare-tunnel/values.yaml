@@ -1,7 +1,13 @@
 cloudflare:
-  tunnelToken:
-    secretName: "lucyscrib-tunnel-token"
-    secretKey: "credential"
+  tunnelName: lucyscrib
+
+  creds:
+    secretName: lucyscrib-tunnel-creds
+    secretKey: credential
+
+  origin:
+    secretName: lucyscrib-tunnel-origin
+    secretKey: cert.pem
 
   enableWarp: false
 

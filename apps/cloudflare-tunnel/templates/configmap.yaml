@@ -4,6 +4,12 @@ metadata:
   name: {{ include "cloudflare-tunnel.fullname" . }}
 data:
   config.yaml: |
+    # Name of the tunnel you want to run
+    tunnel: {{ .Values.cloudflare.tunnelName }}
+    # The location of the secret containing the tunnel credentials
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    # Path the origincert file
+    origincert: /etc/cloudflared/origin/cert.pem
     # General purpose TCP routing for the network
     warp-routing:
       enabled: {{ .Values.cloudflare.enableWarp }}

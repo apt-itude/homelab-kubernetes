@@ -38,12 +38,6 @@ spec:
             - --config
             - /etc/cloudflared/config/config.yaml
             - run
-          env:
-            - name: TUNNEL_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.cloudflare.tunnelToken.secretName }}
-                  key: {{ .Values.cloudflare.tunnelToken.secretKey }}
           livenessProbe:
             httpGet:
               path: /ready
@@ -57,6 +51,12 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/cloudflared/config
+              readOnly: true
+            - name: creds
+              mountPath: /etc/cloudflared/creds
+              readOnly: true
+            - name: origin
+              mountPath: /etc/cloudflared/origin
               readOnly: true
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -77,3 +77,15 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
+        - name: creds
+          secret:
+            secretName: {{ .Values.cloudflare.creds.secretName }}
+            items:
+              - key: {{ .Values.cloudflare.creds.secretKey }}
+                path: credentials.json
+        - name: origin
+          secret:
+            secretName: {{ .Values.cloudflare.origin.secretName }}
+            items:
+              - key: {{ .Values.cloudflare.origin.secretKey }}
+                path: cert.pem
