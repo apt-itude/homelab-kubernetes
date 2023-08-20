@@ -7,7 +7,7 @@ cloudflare:
 
   ingress:
     unifi.lucyscrib.com:
-      service: unifi.unifi.svc.cluster.local
+      service: http://unifi.unifi.svc.cluster.local
 
 replicaCount: 2
 
