@@ -14,6 +14,8 @@ cloudflare:
   ingress:
     unifi.lucyscrib.com:
       service: http://unifi.unifi.svc.cluster.local:8443
+      originRequest:
+        noTLSVerify: true
 
 replicaCount: 2
 

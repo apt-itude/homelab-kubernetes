@@ -26,6 +26,10 @@ data:
 {{- range $hostname, $ingress := .Values.cloudflare.ingress }}
       - hostname: {{ $hostname }}
         service: {{ $ingress.service }}
+  {{- with $ingress.originRequest }}
+        originRequest:
+          {{- toYaml . | nindent 10 }}
+  {{- end }}
 {{- end }}
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
       - service: http_status:404
