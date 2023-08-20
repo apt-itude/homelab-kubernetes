@@ -6,7 +6,8 @@ cloudflare:
   enableWarp: false
 
   ingress:
-    unifi.lucyscrib.com: unifi.unifi.svc.cluster.local
+    unifi.lucyscrib.com:
+      service: unifi.unifi.svc.cluster.local
 
 replicaCount: 2
 
