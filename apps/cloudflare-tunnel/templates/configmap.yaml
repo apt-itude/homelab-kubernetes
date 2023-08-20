@@ -17,11 +17,9 @@ data:
     # requests to. For more about ingress rules, see
     # https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/configuration/ingress
     ingress:
-      {{- with .Values.cloudflare.ingress }}
-        {{- range $hostname, $ingress := .Values.cloudflare.ingress }}
+{{- range $hostname, $ingress := .Values.cloudflare.ingress }}
       - hostname: {{ $hostname }}
         service: {{ $ingress.service }}
-        {{- end }}
-      {{- end }}
+{{- end }}
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
       - service: http_status:404
