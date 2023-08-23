@@ -1,0 +1,113 @@
+# Reference https://github.com/zwave-js/zwave-js-ui/blob/cf783567036da1fefbf3f83dacfe25a2b10480a5/kubernetes/deployment.yaml
+image:
+  repository: zwavejs/zwave-js-ui
+
+# https://zwave-js.github.io/zwave-js-ui/#/guide/env-vars?id=environment-variables
+env:
+  TZ: UTC
+  KEY_S0_Legacy:
+    valueFrom:
+      secretKeyRef:
+        name: zwave
+        key: KEY_S0_Legacy
+  KEY_S2_Unauthenticated:
+    valueFrom:
+      secretKeyRef:
+        name: zwave
+        key: KEY_S2_Unauthenticated
+  KEY_S2_Authenticated:
+    valueFrom:
+      secretKeyRef:
+        name: zwave
+        key: KEY_S2_Authenticated
+  KEY_S2_AccessControl:
+    valueFrom:
+      secretKeyRef:
+        name: zwave
+        key: KEY_S2_AccessControl
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 512Mi
+  requests:
+    cpu: "1"
+    memory: 400Mi
+
+securityContext:
+  allowPrivilegeEscalation: true
+  privileged: true
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /usr/src/app/store
+    size: 1Gi
+  settings:
+    enabled: true
+    mountPath: /usr/src/app/store/settings.json
+    readOnly: true
+    type: configMap
+    name: zwave-js-ui-settings
+    subPath: settings.json
+  usb:
+    enabled: true
+    mountPath: /dev/zwave
+    type: hostPath
+    hostPath: /dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300568-if00-port0
+    # hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_06b8b0308e94eb11b32d3a703d98b6d1-if00-port0
+    hostPathType: CharDevice
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: lucyscrib.com/zwave-controller
+              operator: Exists
+
+configmap:
+  settings:
+    enabled: true
+    data:
+      # https://github.com/zwave-js/zwave-js-ui/blob/77058e87ca85c0794710a4fb40e261c9ba2d3c9b/lib/ZwaveClient.ts
+      settings.json: |
+        {
+          "mqtt": {
+            "disabled": true
+          },
+          "zwave": {
+            "enableStatistics": false,
+            "logEnabled": true,
+            "logLevel": "info",
+            "logToFile": false,
+            "port": "/dev/zwave",
+            "serverEnabled": true,
+            "serverPort": 3000,
+            "serverServiceDiscoveryDisabled": true
+          }
+        }
+
+service:
+  main:
+    ports:
+      http:
+        port: 8091
+      websocket:
+        enabled: true
+        port: 3000
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: lucys-crib
+    hosts:
+      - host: zwave.lucyscrib.com
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - zwave.lucyscrib.com
+        secretName: zwave-lucys-crib-cert
