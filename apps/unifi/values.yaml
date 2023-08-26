@@ -29,6 +29,10 @@ unifi:
 
   mongodb:
     enabled: true
+
+    image:
+      tag: 5.0.20-debian-11-r0
+
     persistence:
       enabled: true
       size: 2Gi
