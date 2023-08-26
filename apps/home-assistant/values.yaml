@@ -1,0 +1,32 @@
+image:
+  repository: ghcr.io/home-assistant/home-assistant
+
+env:
+  TZ: UTC
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+    size: 1Gi
+
+service:
+  main:
+    ports:
+      http:
+        port: 8123
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: lucys-crib
+    hosts:
+      - host: homeassistant.lucyscrib.com
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - homeassistant.lucyscrib.com
+        secretName: homeassistant-lucys-crib-cert
