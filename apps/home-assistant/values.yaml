@@ -9,6 +9,25 @@ persistence:
     enabled: true
     mountPath: /config
     size: 1Gi
+  settings:
+    enabled: true
+    mountPath: /config/configuration.yaml
+    readOnly: true
+    type: configMap
+    name: home-assistant-configuration
+    subPath: configuration.yaml
+
+configmap:
+  configuration:
+    enabled: true
+    data:
+      configuration.yaml: |
+        default_config:
+
+        http:
+          use_x_forwarded_for: true
+          trusted_proxies:
+            - 192.168.1.0/16
 
 service:
   main:
