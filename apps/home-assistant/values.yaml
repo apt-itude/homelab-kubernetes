@@ -9,13 +9,20 @@ persistence:
     enabled: true
     mountPath: /config
     size: 1Gi
-  settings:
+  configuration:
     enabled: true
     mountPath: /config/configuration.yaml
     readOnly: true
     type: configMap
     name: home-assistant-configuration
     subPath: configuration.yaml
+  secrets:
+    enabled: true
+    mountPath: /config/secrets.yaml
+    readOnly: true
+    type: secret
+    name: home-assistant-secrets
+    subPath: secrets.yaml
 
 configmap:
   configuration:
