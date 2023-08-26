@@ -33,6 +33,8 @@ unifi:
     image:
       tag: 5.0.20-debian-11-r0
 
+    useStatefulSet: true
+
     nodeAffinityPreset:
       type: hard
       key: kubernetes.io/arch
