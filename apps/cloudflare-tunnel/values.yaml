@@ -9,7 +9,7 @@ cloudflare:
     secretName: lucyscrib-tunnel-origin
     secretKey: cert.pem
 
-  enableWarp: false
+  enableWarp: true
 
   ingress:
     unifi.lucyscrib.com:
