@@ -18,9 +18,7 @@ cloudflare:
         noTLSVerify: true
 
     homeassistant.lucyscrib.com:
-      service: https://home-assistant.home-assistant.svc.cluster.local:8123
-      originRequest:
-        noTLSVerify: true
+      service: http://home-assistant.home-assistant.svc.cluster.local:8123
 
 replicaCount: 2
 
