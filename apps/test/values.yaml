@@ -37,7 +37,7 @@ ingress:
   enabled: true
   className: ""
   annotations:
-    cert-manager.io/cluster-issuer: lucys-crib
+    cert-manager.io/cluster-issuer: lucys-crib-acme
   hosts:
     - host: test.lucyscrib.com
       paths:
@@ -46,7 +46,7 @@ ingress:
   tls:
     - hosts:
         - test.lucyscrib.com
-      secretName: test-lucys-crib-cert
+      secretName: test-lucys-crib-cert-acme
 
 resources: {}
 
