@@ -101,7 +101,7 @@ ingress:
   main:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: lucys-crib
+      cert-manager.io/cluster-issuer: lucys-crib-acme
     hosts:
       - host: zwave.lucyscrib.com
         paths:
@@ -110,7 +110,7 @@ ingress:
     tls:
       - hosts:
           - zwave.lucyscrib.com
-        secretName: zwave-lucys-crib-cert
+        secretName: zwave-lucys-crib-cert-acme
 
 onepassword:
   items:
