@@ -111,3 +111,9 @@ ingress:
       - hosts:
           - zwave.lucyscrib.com
         secretName: zwave-lucys-crib-cert
+
+onepassword:
+  items:
+    zwave:
+      enabled: true
+      item: ZWave

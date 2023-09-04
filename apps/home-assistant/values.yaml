@@ -56,3 +56,9 @@ ingress:
       - hosts:
           - homeassistant.lucyscrib.com
         secretName: homeassistant-lucys-crib-cert
+
+onepassword:
+  items:
+    home-assistant-secrets:
+      enabled: true
+      item: home-assistant-secrets
