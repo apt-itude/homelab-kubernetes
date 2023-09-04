@@ -54,8 +54,7 @@ persistence:
     enabled: true
     mountPath: /dev/zwave
     type: hostPath
-    hostPath: /dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_81300568-if00-port0
-    # hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_06b8b0308e94eb11b32d3a703d98b6d1-if00-port0
+    hostPath: /dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_06b8b0308e94eb11b32d3a703d98b6d1-if00-port0
     hostPathType: CharDevice
 
 affinity:
