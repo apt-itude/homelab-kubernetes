@@ -1,0 +1,6 @@
+dependencies:
+- name: onepassword
+  repository: file://../../charts/onepassword
+  version: 0.1.0
+digest: sha256:2aef75ca6f923640064ce1645814bd3afd325f4e0e52e6dd5e70b6f20c5b0dd7
+generated: "2023-09-04T10:59:14.929584-04:00"

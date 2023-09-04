@@ -1,0 +1,11 @@
+defaultVault: Homelab
+
+items:
+  homelab-secret:
+    enabled: false
+    item: homelab-creds
+
+  personal-secret:
+    enabled: false
+    vault: Personal
+    item: personal-creds

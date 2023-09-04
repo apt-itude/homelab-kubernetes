@@ -49,3 +49,13 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+onepassword:
+  items:
+    lucyscrib-tunnel-creds:
+      enabled: true
+      item: cloudflared-lucyscrib-tunnel-creds
+
+    lucyscrib-tunnel-origin:
+      enabled: true
+      item: cloudflared-lucyscrib-tunnel-origin
