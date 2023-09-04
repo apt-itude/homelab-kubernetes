@@ -46,7 +46,7 @@ ingress:
   main:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: lucys-crib
+      cert-manager.io/cluster-issuer: lucys-crib-acme
     hosts:
       - host: homeassistant.lucyscrib.com
         paths:
