@@ -1,2 +1,8 @@
 cert-manager:
   installCRDs: true
+
+onepassword:
+  items:
+    cloudflare-api-token-lucyscrib:
+      enabled: true
+      item: cert-manager-cloudflare-api-token-lucyscrib
