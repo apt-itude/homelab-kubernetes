@@ -110,6 +110,21 @@ ingress:
       - hosts:
           - zwave.lucyscrib.com
         secretName: zwave-lucys-crib-cert-acme
+  server:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: lucys-crib-acme
+    hosts:
+      - host: zwave-server.lucyscrib.com
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              port: 3000
+    tls:
+      - hosts:
+          - zwave-server.lucyscrib.com
+        secretName: zwave-server-lucys-crib-cert-acme
 
 onepassword:
   items:
