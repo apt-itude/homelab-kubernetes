@@ -36,6 +36,8 @@ configmap:
           trusted_proxies:
             - 10.42.0.0/16
 
+        automation: !include automations.yaml
+
 service:
   main:
     ports:
