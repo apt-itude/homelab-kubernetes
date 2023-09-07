@@ -18,6 +18,12 @@ persistence:
     type: configMap
     name: home-assistant-configuration
     subPath: configuration.yaml
+  static-config:
+    enabled: true
+    mountPath: /config/static-config
+    readOnly: true
+    type: configMap
+    name: static-config
   secrets:
     enabled: true
     mountPath: /config/secrets.yaml
@@ -40,86 +46,91 @@ configmap:
 
         automation: !include automations.yaml
 
-        rest_command:
-          brewers_friend_publish:
-            url: "https://log.brewersfriend.com/stream/{{ api_key }}"
-            method: POST
-            content_type: "application/json; charset=utf-8"
-            payload: |
-              {
-                "name": "HomeAssistant {{ fermenter_name }}",
-                "report_source": "HomeAssistant",
-                "temp": "{{ temperature }}",
-                "temp_unit": "F",
-                "gravity": "{{ specific_gravity }}",
-                "gravity_unit": "G"
-              }
+        rest_command: !include static-config/rest_command.yaml
 
-          pagerduty_trigger:
-            url: "https://events.pagerduty.com/v2/enqueue"
-            method: POST
-            content_type: "application/json; charset=utf-8"
-            payload: |
-              {
-                "routing_key": "{{ pagerduty_routing_key }}",
-                "event_action": "trigger",
-                "dedup_key": "{{ alert_key }}",
-                "payload": {
-                  "summary": "{{ summary }}",
-                  "severity": "{{ severity }}",
-                  "class": "{{ class }}",
-                  "group": "{{ group }}",
-                  "component": "{{ component }}",
-                  "source": "homeassistant.lucyscrib.com"
+yamlConfigFiles:
+  static-config:
+    files:
+      rest_command:
+        brewers_friend_publish:
+          url: "https://log.brewersfriend.com/stream/{{ api_key }}"
+          method: POST
+          content_type: "application/json; charset=utf-8"
+          payload: |
+            {
+              "name": "HomeAssistant {{ fermenter_name }}",
+              "report_source": "HomeAssistant",
+              "temp": "{{ temperature }}",
+              "temp_unit": "F",
+              "gravity": "{{ specific_gravity }}",
+              "gravity_unit": "G"
+            }
+
+        pagerduty_trigger:
+          url: "https://events.pagerduty.com/v2/enqueue"
+          method: POST
+          content_type: "application/json; charset=utf-8"
+          payload: |
+            {
+              "routing_key": "{{ pagerduty_routing_key }}",
+              "event_action": "trigger",
+              "dedup_key": "{{ alert_key }}",
+              "payload": {
+                "summary": "{{ summary }}",
+                "severity": "{{ severity }}",
+                "class": "{{ class }}",
+                "group": "{{ group }}",
+                "component": "{{ component }}",
+                "source": "homeassistant.lucyscrib.com"
+              }
+            }
+
+        pagerduty_resolve:
+          url: "https://events.pagerduty.com/v2/enqueue"
+          method: POST
+          content_type: "application/json; charset=utf-8"
+          payload: |
+            {
+              "routing_key": "{{ pagerduty_routing_key }}",
+              "event_action": "resolve",
+              "dedup_key": "{{ alert_key }}"
+            }
+
+        pagerduty_entity_trigger:
+          url: "https://events.pagerduty.com/v2/enqueue"
+          method: POST
+          content_type: "application/json; charset=utf-8"
+          payload: |
+            {
+              "routing_key": "{{ pagerduty_routing_key }}",
+              "event_action": "trigger",
+              "dedup_key": "{{ type }}:{{ entity_id }}",
+              "payload": {
+                "summary": "{{ summary }}",
+                "severity": "{{ severity }}",
+                "class": "{{ type }}",
+                "group": "{{ area_name(entity_id) }}",
+                "component": "{{ entity_id }}",
+                "source": "homeassistant.lucyscrib.com"
+              },
+              "links": [
+                {
+                  "href": "https://homeassistant.lucyscrib.com/history?entity_id={{ entity_id }}",
+                  "text": "{{ state_attr(entity_id, 'friendly_name') }}"
                 }
-              }
+              ]
+            }
 
-          pagerduty_resolve:
-            url: "https://events.pagerduty.com/v2/enqueue"
-            method: POST
-            content_type: "application/json; charset=utf-8"
-            payload: |
-              {
-                "routing_key": "{{ pagerduty_routing_key }}",
-                "event_action": "resolve",
-                "dedup_key": "{{ alert_key }}"
-              }
-
-          pagerduty_entity_trigger:
-            url: "https://events.pagerduty.com/v2/enqueue"
-            method: POST
-            content_type: "application/json; charset=utf-8"
-            payload: |
-              {
-                "routing_key": "{{ pagerduty_routing_key }}",
-                "event_action": "trigger",
-                "dedup_key": "{{ type }}:{{ entity_id }}",
-                "payload": {
-                  "summary": "{{ summary }}",
-                  "severity": "{{ severity }}",
-                  "class": "{{ type }}",
-                  "group": "{{ area_name(entity_id) }}",
-                  "component": "{{ entity_id }}",
-                  "source": "homeassistant.lucyscrib.com"
-                },
-                "links": [
-                  {
-                    "href": "https://homeassistant.lucyscrib.com/history?entity_id={{ entity_id }}",
-                    "text": "{{ state_attr(entity_id, 'friendly_name') }}"
-                  }
-                ]
-              }
-
-          pagerduty_entity_resolve:
-            url: "https://events.pagerduty.com/v2/enqueue"
-            method: POST
-            content_type: "application/json; charset=utf-8"
-            payload: |
-              {
-                "routing_key": "{{ pagerduty_routing_key }}",
-                "event_action": "resolve",
-                "dedup_key": "{{ type }}:{{ entity_id }}"
-              }
+        pagerduty_entity_resolve:
+          url: "https://events.pagerduty.com/v2/enqueue"
+          method: POST
+          content_type: "application/json; charset=utf-8"
+          payload: |
+            {
+              "routing_key": "{{ pagerduty_routing_key }}",
+              "event_action": "resolve",
+              "dedup_key": "{{ type }}:{{ entity_id }}"
+            }
 
 service:
   main:
