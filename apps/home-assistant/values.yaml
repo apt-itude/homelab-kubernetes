@@ -72,6 +72,7 @@ yamlConfigFiles:
               clear_time:
                 hours: 0
                 minutes: 15
+                seconds: 0
               pagerduty_routing_key: !secret pagerduty_routing_key
 
         - id: living_room_co_alert
@@ -99,7 +100,6 @@ yamlConfigFiles:
               clear_time:
                 hours: 1
                 minutes: 0
-                seconds: 0
                 seconds: 0
               pagerduty_routing_key: !secret pagerduty_routing_key
 
