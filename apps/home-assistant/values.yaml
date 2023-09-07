@@ -61,18 +61,75 @@ yamlConfigFiles:
   static-config:
     files:
       automations: |
-        alias: ZWave Nodes Unhealthy Alert
-        use_blueprint:
-          path: custom/binary_alert.yaml
-          input:
-            sensor: binary_sensor.zwave_nodes_unhealthy
-            alert_message: One or more ZWave nodes are unhealthy
-            alert_severity: warning
-            clear_time:
-              hours: 0
-              minutes: 1
-              seconds: 0
-            pagerduty_routing_key: !secret pagerduty_routing_key
+        - id: living_room_smoke_alert
+          alias: Living Room Smoke Alert
+          use_blueprint:
+            path: custom/binary_alert.yaml
+            input:
+              sensor: binary_sensor.living_room_smoke_co_detector_smoke_detected
+              alert_message: Smoke detected in living room
+              alert_severity: critical
+              clear_time:
+                hours: 0
+                minutes: 15
+              pagerduty_routing_key: !secret pagerduty_routing_key
+
+        - id: living_room_co_alert
+          alias: Living Room CO Alert
+          use_blueprint:
+            path: custom/binary_alert.yaml
+            input:
+              sensor: binary_sensor.living_room_smoke_co_detector_carbon_monoxide_detected
+              alert_message: Carbon monoxide detected in living room
+              alert_severity: critical
+              clear_time:
+                hours: 0
+                minutes: 15
+                seconds: 0
+              pagerduty_routing_key: !secret pagerduty_routing_key
+
+        - id: kitchen_sink_leak_alert
+          alias: Kitchen Sink Leak Alert
+          use_blueprint:
+            path: custom/binary_alert.yaml
+            input:
+              sensor: binary_sensor.kitchen_sink_water_sensor_water_leak_detected
+              alert_message: Leak detected under kitchen sink
+              alert_severity: critical
+              clear_time:
+                hours: 1
+                minutes: 0
+                seconds: 0
+                seconds: 0
+              pagerduty_routing_key: !secret pagerduty_routing_key
+
+        - id: basement_water_heater_leak_alert
+          alias: Basement Water Heater Leak Alert
+          use_blueprint:
+            path: custom/binary_alert.yaml
+            input:
+              sensor: binary_sensor.basement_water_heater_water_sensor_water_leak_detected
+              alert_message: Leak detected at basement water heater
+              alert_severity: critical
+              clear_time:
+                hours: 1
+                minutes: 0
+                seconds: 0
+              pagerduty_routing_key: !secret pagerduty_routing_key
+
+        - id: zwave_nodes_unhealthy_alert
+          alias: ZWave Nodes Unhealthy Alert
+          use_blueprint:
+            path: custom/binary_alert.yaml
+            input:
+              sensor: binary_sensor.zwave_nodes_unhealthy
+              alert_message: One or more ZWave nodes are unhealthy
+              alert_severity: warning
+              clear_time:
+                hours: 0
+                minutes: 1
+                seconds: 0
+              pagerduty_routing_key: !secret pagerduty_routing_key
 
       rest_command: |
         brewers_friend_publish:
