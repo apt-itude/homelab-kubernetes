@@ -31,6 +31,12 @@ persistence:
     type: secret
     name: home-assistant-secrets
     subPath: secrets.yaml
+  blueprints-automation:
+    enabled: true
+    mountPath: /config/blueprints/automation/custom
+    readOnly: true
+    type: configMap
+    name: blueprints-automation
 
 configmap:
   configuration:
@@ -51,7 +57,7 @@ configmap:
 yamlConfigFiles:
   static-config:
     files:
-      rest_command:
+      rest_command: |
         brewers_friend_publish:
           url: "https://log.brewersfriend.com/stream/{{ api_key }}"
           method: POST
@@ -131,6 +137,75 @@ yamlConfigFiles:
               "event_action": "resolve",
               "dedup_key": "{{ type }}:{{ entity_id }}"
             }
+
+  blueprints-automation:
+    files:
+      binary_alert: |
+        blueprint:
+          domain: automation
+          name: Binary Sensor Alert
+          description: Send alert based on a binary sensor
+          input:
+            sensor:
+              name: Sensor
+              description: The sensor to trigger the alert
+              selector:
+                entity:
+                  domain: binary_sensor
+            alert_message:
+              name: Alert Message
+              description: The message to display in the alert
+            alert_severity:
+              name: Alert Severity
+              description: The severity level of the alert
+              selector:
+                select:
+                  options:
+                    - critical
+                    - error
+                    - warning
+                    - info
+            clear_time:
+              name: Clear Time
+              description: The duration that the sensor must be off before clearing the alert
+              selector:
+                duration:
+            pagerduty_routing_key:
+              name: PagerDuty Routing Key
+              description: The key of the PagerDuty integration to which to route the alerts
+              default: ""
+              selector:
+                text:
+
+        variables:
+          entity_id: !input sensor
+          alert_type: "{{ state_attr(entity_id, 'device_class') }}"
+
+        trigger:
+          - platform: state
+            entity_id: !input sensor
+            to: "on"
+
+        action:
+          - service: rest_command.pagerduty_entity_trigger
+            data:
+              pagerduty_routing_key: !input pagerduty_routing_key
+              entity_id: !input sensor
+              type: "{{ alert_type }}"
+              summary: !input alert_message
+              severity: !input alert_severity
+          - wait_for_trigger:
+              - platform: state
+                entity_id:
+                  - !input sensor
+                to: "off"
+                for: !input clear_time
+            continue_on_timeout: false
+          - service: rest_command.pagerduty_entity_resolve
+            data:
+              pagerduty_routing_key: !input pagerduty_routing_key
+              entity_id: !input sensor
+              type: "{{ alert_type }}"
 
 service:
   main:

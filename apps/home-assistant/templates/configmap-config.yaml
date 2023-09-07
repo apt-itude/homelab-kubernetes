@@ -1,4 +1,4 @@
-{{- range $configmapName, $configmapValues := .Values.yamlConfigFiles -}}
+{{- range $configmapName, $configmapValues := .Values.yamlConfigFiles }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -7,6 +7,6 @@ metadata:
 data:
   {{- range $fileName, $fileValues := $configmapValues.files }}
   {{ $fileName }}.yaml: |
-    {{ toYaml $fileValues | nindent 4 }}
+    {{ $fileValues | nindent 4 }}
   {{- end }}
 {{- end }}
