@@ -51,12 +51,29 @@ configmap:
             - 10.42.0.0/16
 
         automation: !include automations.yaml
+        automation static: !include static-config/automations.yaml
 
         rest_command: !include static-config/rest_command.yaml
+
+        template: !include static-config/templates.yaml
 
 yamlConfigFiles:
   static-config:
     files:
+      automations: |
+        alias: ZWave Nodes Unhealthy Alert
+        use_blueprint:
+          path: custom/binary_alert.yaml
+          input:
+            sensor: binary_sensor.zwave_nodes_unhealthy
+            alert_message: One or more ZWave nodes are unhealthy
+            alert_severity: warning
+            clear_time:
+              hours: 0
+              minutes: 1
+              seconds: 0
+            pagerduty_routing_key: !secret pagerduty_routing_key
+
       rest_command: |
         brewers_friend_publish:
           url: "https://log.brewersfriend.com/stream/{{ api_key }}"
@@ -137,6 +154,20 @@ yamlConfigFiles:
               "event_action": "resolve",
               "dedup_key": "{{ type }}:{{ entity_id }}"
             }
+
+      templates: |
+        - binary_sensor:
+          - name: ZWave Nodes Unhealthy
+            device_class: problem
+            state: >
+              {{
+                states |
+                selectattr("entity_id", "search", "node_status") |
+                selectattr('state', 'in', ['dead', 'unavailable', 'unknown']) |
+                map(attribute='entity_id') |
+                list |
+                count
+              }}
 
   blueprints-automation:
     files:
