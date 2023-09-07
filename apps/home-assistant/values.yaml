@@ -4,6 +4,8 @@ image:
 env:
   TZ: UTC
 
+priorityClassName: critical
+
 persistence:
   config:
     enabled: true

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: priorities
+description: A Helm chart for Priority Classes
+type: application
+version: 0.1.0

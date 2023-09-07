@@ -1,0 +1,17 @@
+{{- $root := . -}}
+{{- range $name, $values := .Values.priorityClasses }}
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "priorities.labels" $root | nindent 4 }}
+value: {{ $values.value | required ".value is required" }}
+  {{- with $values.preemptionPolicy }}
+preemptionPolicy: {{ . }}
+  {{- end }}
+  {{- with $values.description }}
+description: {{ . }}
+  {{- end }}
+{{- end }}
