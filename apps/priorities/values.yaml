@@ -1,0 +1,4 @@
+priorityClasses:
+  critical:
+    value: 9999
+    description: Critical to home function

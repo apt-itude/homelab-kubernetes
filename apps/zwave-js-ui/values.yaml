@@ -2,6 +2,8 @@
 image:
   repository: zwavejs/zwave-js-ui
 
+priorityClassName: critical
+
 # https://zwave-js.github.io/zwave-js-ui/#/guide/env-vars?id=environment-variables
 env:
   TZ: UTC
