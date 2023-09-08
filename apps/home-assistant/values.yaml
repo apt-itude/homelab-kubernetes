@@ -339,25 +339,16 @@ yamlConfigFiles:
               description: The API key to use to authenticate with Brewer's Friend
               selector:
                 text:
-            publish_interval:
-              name: Publish Interval
-              description: Number of minutes between publishes
-              selector:
-                number:
-                  min: 15
-                  max: 1440
-              default: 20
 
         variables:
           fermenter_name: !input fermenter_name
           temperature_sensor: !input temperature_sensor
           specific_gravity_sensor: !input specific_gravity_sensor
           api_key: !input api_key
-          publish_interval: !input publish_interval
 
         trigger:
           - platform: time_pattern
-            minutes: "/{{ publish_interval }}"
+            minutes: "/20"
 
         condition:
           - condition: and
