@@ -365,19 +365,19 @@ yamlConfigFiles:
               - condition: not
                 conditions:
                   - condition: state
-                    entity_id: {{ temperature_sensor }}
+                    entity_id: "{{ temperature_sensor }}"
                     state: unavailable
               - condition: not
                 conditions:
                   - condition: state
-                    entity_id: {{ specific_gravity_sensor }}
+                    entity_id: "{{ specific_gravity_sensor }}"
                     state: unavailable
 
         action:
           - service: rest_command.brewers_friend_publish
             data:
-              api_key: {{ api_key }}
-              fermenter_name: {{ fermenter_name }}
+              api_key: "{{ api_key }}"
+              fermenter_name: "{{ fermenter_name }}"
               temperature: "{{ states(temperature_sensor) }}"
               specific_gravity: "{{ states(specific_gravity_sensor) }}"
 
