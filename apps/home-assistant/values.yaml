@@ -37,6 +37,11 @@ persistence:
     readOnly: true
     type: configMap
     name: blueprints-automation
+  dbus:
+    enabled: true
+    mountPath: /run/dbus
+    type: hostPath
+    hostPath: /run/dbus
 
 configmap:
   configuration:
