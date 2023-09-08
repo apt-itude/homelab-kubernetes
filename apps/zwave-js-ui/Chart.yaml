@@ -3,7 +3,7 @@ name: zwave-js-ui
 description: Fully configurable Zwave Control Panel and MQTT gateway using NodeJS and Vue
 type: application
 version: 0.1.0
-appVersion: 8.23.1
+appVersion: 8.23.0
 
 dependencies:
   - name: common
