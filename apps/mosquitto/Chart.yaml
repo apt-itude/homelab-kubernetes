@@ -1,0 +1,15 @@
+apiVersion: v2
+name: mosquitto
+description: Eclipse Mosquitto - An open source MQTT broker
+type: application
+version: 0.1.0
+appVersion: 2.0.17
+
+dependencies:
+  - name: common
+    repository: https://library-charts.k8s-at-home.com
+    version: 4.5.2
+
+  - name: onepassword
+    repository: file://../../charts/onepassword
+    version: 0.1.0

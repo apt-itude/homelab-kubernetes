@@ -1,0 +1,33 @@
+image:
+  repository: eclipse-mosquitto
+
+service:
+  main:
+    ports:
+      http:
+        enabled: false
+      mqtt:
+        enabled: true
+        port: 1883
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /mosquitto/config/mosquitto.conf
+    readOnly: true
+    type: configMap
+    name: mosquitto-config
+    subPath: mosquitto.conf
+  data:
+    enabled: true
+    mountPath: /mosquitto/data
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+configmap:
+  config:
+    enabled: true
+    data:
+      mosquitto.conf: |
+        persistence true
+        persistence_location /mosquitto/data
