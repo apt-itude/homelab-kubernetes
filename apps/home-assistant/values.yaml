@@ -158,7 +158,7 @@ yamlConfigFiles:
           advertise_ip: 192.168.1.212
 
       logger: |
-        default: info
+        default: warning
 
       rest_command: |
         brewers_friend_publish:
