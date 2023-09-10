@@ -56,11 +56,14 @@ configmap:
           trusted_proxies:
             - 10.42.0.0/16
 
+        # Managed via UI
         automation: !include automations.yaml
+        scene: !include scenes.yaml
+        script: !include scripts.yaml
+
+        # Managed via gitops
         automation static: !include static-config/automations.yaml
-
         rest_command: !include static-config/rest_command.yaml
-
         template: !include static-config/templates.yaml
 
 yamlConfigFiles:
