@@ -63,6 +63,7 @@ configmap:
 
         # Managed via gitops
         automation static: !include static-config/automations.yaml
+        homekit: !include static-config/homekit.yaml
         rest_command: !include static-config/rest_command.yaml
         template: !include static-config/templates.yaml
 
@@ -149,6 +150,11 @@ yamlConfigFiles:
               temperature_sensor: sensor.tilt_green_temperature
               specific_gravity_sensor: sensor.tilt_green_specific_gravity
               api_key: !secret brewers_friend_api_key
+
+      homekit: |
+        - name: Home Assistant Bridge
+          port: 21063
+          advertise_ip: 192.168.1.212
 
       rest_command: |
         brewers_friend_publish:
@@ -380,6 +386,16 @@ service:
     ports:
       http:
         port: 8123
+  homekit-bridge:
+    enabled: true
+    type: LoadBalancer
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: 192.168.1.212
+    ports:
+      homekit-bridge:
+        enabled: true
+        port: 21063
+        protocol: TCP
 
 ingress:
   main:
