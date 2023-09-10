@@ -64,6 +64,7 @@ configmap:
         # Managed via gitops
         automation static: !include static-config/automations.yaml
         homekit: !include static-config/homekit.yaml
+        logger: !include static-config/logger.yaml
         rest_command: !include static-config/rest_command.yaml
         template: !include static-config/templates.yaml
 
@@ -155,6 +156,9 @@ yamlConfigFiles:
         - name: Home Assistant Bridge
           port: 21063
           advertise_ip: 192.168.1.212
+
+      logger: |
+        default: info
 
       rest_command: |
         brewers_friend_publish:
