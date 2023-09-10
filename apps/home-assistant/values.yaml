@@ -400,7 +400,7 @@ service:
         enabled: true
         port: 21063
         protocol: TCP
-      homekit-bridge-udp:
+      homekit-udp:
         enabled: true
         port: 5353
         protocol: TCP
