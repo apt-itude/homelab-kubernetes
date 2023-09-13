@@ -166,6 +166,15 @@ yamlConfigFiles:
           port: 21063
           advertise_ip: 192.168.1.212
 
+          filter:
+            include_domains:
+              - alarm_control_panel
+              - climate
+              - fan
+              - light
+              - lock
+              - switch
+
       logger: |
         default: warning
 
