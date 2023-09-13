@@ -6,6 +6,15 @@ env:
 
 priorityClassName: critical
 
+affinity:
+  nodeAffinity:
+    # This is required for the homekit bridge
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: lucyscrib.com/mdns-reflector
+              operator: Exists
+
 persistence:
   config:
     enabled: true
