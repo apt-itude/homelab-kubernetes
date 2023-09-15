@@ -1,0 +1,42 @@
+kube-prometheus-stack:
+  prometheus:
+    ingress:
+      enabled: true
+
+      annotations:
+        cert-manager.io/cluster-issuer: lucys-crib-acme
+
+      hosts:
+        - prometheus.lucyscrib.com
+
+      tls:
+        - hosts:
+            - prometheus.lucyscrib.com
+          secretName: prometheus-lucys-crib-cert-acme
+
+  grafana:
+    ingress:
+      enabled: true
+
+      annotations:
+        cert-manager.io/cluster-issuer: lucys-crib-acme
+
+      hosts:
+        - grafana.lucyscrib.com
+
+      tls:
+        - hosts:
+            - grafana.lucyscrib.com
+          secretName: grafana-lucys-crib-cert-acme
+
+    serviceMonitor:
+      enabled: false
+
+  alertmanager:
+    enabled: false
+
+  defaultRules:
+    create: false
+
+  kubernetesServiceMonitors:
+    enabled: false
