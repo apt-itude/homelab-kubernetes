@@ -46,7 +46,36 @@ kube-prometheus-stack:
     enabled: false
 
   defaultRules:
-    create: false
+    create: true
+    rules:
+      alertmanager: false
+      etcd: false
+      configReloaders: false
+      general: true
+      k8s: true
+      kubeApiserverAvailability: false
+      kubeApiserverBurnrate: false
+      kubeApiserverHistogram: false
+      kubeApiserverSlos: false
+      kubeControllerManager: false
+      kubelet: false
+      kubeProxy: false
+      kubePrometheusGeneral: false
+      kubePrometheusNodeRecording: false
+      kubernetesApps: false
+      kubernetesResources: false
+      kubernetesStorage: false
+      kubernetesSystem: false
+      kubeSchedulerAlerting: false
+      kubeSchedulerRecording: false
+      kubeStateMetrics: false
+      network: false
+      node: true
+      nodeExporterAlerting: false
+      nodeExporterRecording: false
+      prometheus: false
+      prometheusOperator: false
+      windows: false
 
   kubeApiServer:
     enabled: false
