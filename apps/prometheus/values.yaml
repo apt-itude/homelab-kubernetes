@@ -48,5 +48,20 @@ kube-prometheus-stack:
   defaultRules:
     create: false
 
-  kubernetesServiceMonitors:
+  kubeApiServer:
+    enabled: false
+
+  kubeControllerManager:
+    enabled: false
+
+  coreDns:
+    enabled: false
+
+  kubeEtcd:
+    enabled: false
+
+  kubeScheduler:
+    enabled: false
+
+  kubeProxy:
     enabled: false
