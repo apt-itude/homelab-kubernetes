@@ -1,0 +1,59 @@
+image:
+  repository: allangood/rtlamr2mqtt
+
+securityContext:
+  privileged: true
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /etc/rtlamr2mqtt.yaml
+    readOnly: true
+    type: configMap
+    name: rtlamr2mqtt-config
+    subPath: rtlamr2mqtt.yaml
+  data:
+    enabled: true
+    mountPath: /var/lib/rtlamr2mqtt
+    accessMode: ReadWriteOnce
+    size: 256Mi
+  usb:
+    enabled: true
+    mountPath: /dev/bus/usb
+    type: hostPath
+    hostPath: /dev/bus/usb
+
+configmap:
+  config:
+    enabled: true
+    data:
+      rtlamr2mqtt.yaml: |
+        mqtt:
+          ha_autodiscovery: true
+          ha_autodiscovery_topic: homeassistant
+          base_topic: rtlamr
+          host: mosquitto.mosquitto.svc.cluster.local
+          port: 1883
+        meters:
+          - id: 1553583419
+            protocol: scm+
+            name: electrical_meter
+            type: energy
+            multiplier: 0.01
+            precision: 3
+            unit_of_measurement: kWh
+            icon: mdi:gauge
+            device_class: energy
+            state_class: total
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: lucyscrib.com/rtlamr-dongle
+              operator: Exists
+
+service:
+  main:
+    enabled: false
