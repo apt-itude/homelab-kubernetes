@@ -1,5 +1,15 @@
 kube-prometheus-stack:
   prometheus:
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 50Gi
+
     ingress:
       enabled: true
 
