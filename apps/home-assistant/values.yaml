@@ -73,6 +73,7 @@ configmap:
         # Managed via gitops
         automation static: !include static-config/automations.yaml
         homekit: !include static-config/homekit.yaml
+        input_number: !include static-config/input_number.yaml
         logger: !include static-config/logger.yaml
         rest_command: !include static-config/rest_command.yaml
         template: !include static-config/templates.yaml
@@ -174,6 +175,16 @@ yamlConfigFiles:
               - light
               - lock
               - switch
+
+      input_number: |
+        electricity_cost:
+          name: Electricity Cost
+          min: 0
+          max: 100
+          step: 0.001
+          mode: box
+          unit_of_measurement: USD
+          icon: mdi:currency-usd
 
       logger: |
         default: warning
