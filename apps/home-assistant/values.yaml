@@ -183,7 +183,7 @@ yamlConfigFiles:
           max: 100
           step: 0.001
           mode: box
-          unit_of_measurement: USD
+          unit_of_measurement: USD/kWh
           icon: mdi:currency-usd
 
       logger: |
