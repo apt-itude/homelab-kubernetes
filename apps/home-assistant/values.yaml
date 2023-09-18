@@ -6,6 +6,14 @@ env:
 
 priorityClassName: critical
 
+resources:
+  requests:
+    cpu: 100m
+    memory: 500Mi
+  limits:
+    cpu: 500m
+    memory: 750Mi
+
 affinity:
   nodeAffinity:
     # This is required for the homekit bridge
