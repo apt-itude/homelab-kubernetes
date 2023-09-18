@@ -29,11 +29,11 @@ env:
         key: KEY_S2_AccessControl
 
 resources:
-  limits:
-    cpu: "1"
-    memory: 512Mi
   requests:
-    cpu: "1"
+    cpu: 50m
+    memory: 200Mi
+  limits:
+    cpu: 200m
     memory: 400Mi
 
 securityContext:
