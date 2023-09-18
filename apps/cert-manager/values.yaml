@@ -5,6 +5,32 @@ cert-manager:
     - --dns01-recursive-nameservers-only
     - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
 
+  resources:
+    requests:
+      cpu: 1m
+      memory: 50Mi
+    limits:
+      cpu: 20m
+      memory: 100Mi
+
+  cainjector:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 80Mi
+      limits:
+        cpu: 20m
+        memory: 160Mi
+
+  webhook:
+    resources:
+      requests:
+        cpu: 1m
+        memory: 25Mi
+      limits:
+        cpu: 10m
+        memory: 50Mi
+
 onepassword:
   items:
     cloudflare-api-token-lucyscrib:
