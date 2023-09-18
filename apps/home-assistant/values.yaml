@@ -53,14 +53,6 @@ persistence:
     type: hostPath
     hostPath: /run/dbus
 
-additionalContainers:
-  sqlite:
-    image: gkeinos/sqlite3:latest
-    imagePullPolicy: IfNotPresent
-    volumeMounts:
-      - mountPath: /config
-        name: config
-
 configmap:
   configuration:
     enabled: true
