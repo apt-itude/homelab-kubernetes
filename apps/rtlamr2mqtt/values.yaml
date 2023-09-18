@@ -41,7 +41,7 @@ configmap:
             type: energy
             multiplier: 0.01
             precision: 3
-            unit_of_measurement: kWh
+            unit_of_measurement: Wh
             icon: mdi:gauge
             device_class: energy
             state_class: total
