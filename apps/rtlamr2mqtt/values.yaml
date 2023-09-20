@@ -39,8 +39,7 @@ configmap:
             protocol: scm+
             name: electrical_meter
             type: energy
-            multiplier: 0.01
-            precision: 3
+            format: "#####.##"
             unit_of_measurement: Wh
             icon: mdi:gauge
             device_class: energy
