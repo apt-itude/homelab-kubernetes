@@ -40,7 +40,7 @@ configmap:
             name: electrical_meter
             type: energy
             format: "#####.##"
-            unit_of_measurement: Wh
+            unit_of_measurement: kWh
             icon: mdi:gauge
             device_class: energy
             state_class: total
