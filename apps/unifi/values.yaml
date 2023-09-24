@@ -21,6 +21,14 @@ unifi:
             - unifi.lucyscrib.com
           secretName: unifi-lucys-crib-cert-acme
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 750Mi
+    limits:
+      cpu: 50m
+      memory: 750Mi
+
   persistence:
     data:
       enabled: true
@@ -40,6 +48,14 @@ unifi:
       key: kubernetes.io/arch
       values:
         - amd64
+
+    resources:
+      requests:
+        cpu: 150m
+        memory: 200Mi
+      limits:
+        cpu: 300m
+        memory: 300Mi
 
     persistence:
       enabled: true
