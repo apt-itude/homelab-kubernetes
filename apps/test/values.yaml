@@ -48,7 +48,13 @@ ingress:
         - test.lucyscrib.com
       secretName: test-lucys-crib-cert-acme
 
-resources: {}
+resources:
+  requests:
+    cpu: 1m
+    memory: 5Mi
+  limits:
+    cpu: 10m
+    memory: 5Mi
 
 autoscaling:
   enabled: false
