@@ -1,8 +1,18 @@
 kube-prometheus-stack:
+  prometheusOperator:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 50Mi
+      limits:
+        cpu: 20m
+        memory: 50Mi
+
   prometheus:
     prometheusSpec:
       retention: 14d
       retentionSize: 45GB
+
       storageSpec:
         volumeClaimTemplate:
           spec:
@@ -11,6 +21,14 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 50Gi
+
+      resources:
+        requests:
+          cpu: 30m
+          memory: 1.5Gi
+        limits:
+          cpu: 100m
+          memory: 1.5Gi
 
     ingress:
       enabled: true
@@ -27,6 +45,14 @@ kube-prometheus-stack:
           secretName: prometheus-lucys-crib-cert-acme
 
   grafana:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 350Mi
+      limits:
+        cpu: 100m
+        memory: 350Mi
+
     ingress:
       enabled: true
 
@@ -46,6 +72,24 @@ kube-prometheus-stack:
 
   alertmanager:
     enabled: false
+
+  prometheus-node-exporter:
+    resources:
+      requests:
+        cpu: 20m
+        memory: 50Mi
+      limits:
+        cpu: 50m
+        memory: 50Mi
+
+  kube-state-metrics:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 30Mi
+      limits:
+        cpu: 20m
+        memory: 30Mi
 
   defaultRules:
     create: true
