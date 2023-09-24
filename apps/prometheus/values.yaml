@@ -86,10 +86,10 @@ kube-prometheus-stack:
     resources:
       requests:
         cpu: 5m
-        memory: 30Mi
+        memory: 50Mi
       limits:
         cpu: 20m
-        memory: 30Mi
+        memory: 50Mi
 
   defaultRules:
     create: true
