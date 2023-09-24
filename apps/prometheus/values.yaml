@@ -1,6 +1,8 @@
 kube-prometheus-stack:
   prometheus:
     prometheusSpec:
+      retention: 14d
+      retentionSize: 45GB
       storageSpec:
         volumeClaimTemplate:
           spec:
