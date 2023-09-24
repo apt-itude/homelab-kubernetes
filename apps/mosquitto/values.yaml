@@ -10,6 +10,14 @@ service:
         enabled: true
         port: 1883
 
+resources:
+  requests:
+    cpu: 1m
+    memory: 10Mi
+  limits:
+    cpu: 10m
+    memory: 10Mi
+
 persistence:
   config:
     enabled: true
