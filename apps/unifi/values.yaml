@@ -26,7 +26,7 @@ unifi:
       cpu: 10m
       memory: 750Mi
     limits:
-      cpu: 50m
+      cpu: 100m
       memory: 750Mi
 
   persistence:
