@@ -4,6 +4,14 @@ image:
 securityContext:
   privileged: true
 
+resources:
+  requests:
+    cpu: 100m
+    memory: 50Mi
+  limits:
+    cpu: 200m
+    memory: 50Mi
+
 persistence:
   config:
     enabled: true
