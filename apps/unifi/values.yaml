@@ -23,10 +23,10 @@ unifi:
 
   resources:
     requests:
-      cpu: 10m
+      cpu: 100m
       memory: 750Mi
     limits:
-      cpu: 100m
+      cpu: 300m
       memory: 750Mi
 
   persistence:
