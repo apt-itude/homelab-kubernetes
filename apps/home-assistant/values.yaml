@@ -107,6 +107,34 @@ yamlConfigFiles:
             delay_time: 0
 
       automations: |
+        - id: home_alarm_alert
+          alias: Home alarm alert
+          trigger:
+            - platform: state
+              entity_id: alarm_control_panel.home_alarm
+              to: "triggered"
+          action:
+            - service: rest_command.pagerduty_entity_trigger
+              data:
+                pagerduty_routing_key: !secret pagerduty_routing_key
+                entity_id: alarm_control_panel.home_alarm
+                type: Alarm
+                summary: Home alarm has been triggered
+                severity: critical
+            - wait_for_trigger:
+                - platform: state
+                  entity_id:
+                    - alarm_control_panel.home_alarm
+                  to: disarmed
+                  for:
+                    minutes: 1
+              continue_on_timeout: false
+            - service: rest_command.pagerduty_entity_resolve
+              data:
+                pagerduty_routing_key: !secret pagerduty_routing_key
+                entity_id: alarm_control_panel.home_alarm
+                type: Alarm
+
         - id: living_room_smoke_alert
           alias: Living Room Smoke Alert
           use_blueprint:
