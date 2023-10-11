@@ -97,6 +97,12 @@ yamlConfigFiles:
           code_arm_required: false
           disarmed:
             trigger_time: 0
+          armed_away:
+            arming_time: 60
+            delay_time: 30
+          armed_home:
+            arming_time: 0
+            delay_time: 30
           armed_night:
             arming_time: 0
             delay_time: 0
