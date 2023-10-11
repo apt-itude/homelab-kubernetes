@@ -94,7 +94,6 @@ yamlConfigFiles:
         - platform: manual
           name: Home Alarm
           code: !secret home_alarm_code
-          code_arm_required: false
           disarmed:
             trigger_time: 0
           armed_away:
