@@ -79,6 +79,7 @@ configmap:
         script: !include scripts.yaml
 
         # Managed via gitops
+        alarm_control_panel: !include static-config/alarm_control_panel.yaml
         automation static: !include static-config/automations.yaml
         homekit: !include static-config/homekit.yaml
         input_number: !include static-config/input_number.yaml
@@ -89,6 +90,17 @@ configmap:
 yamlConfigFiles:
   static-config:
     files:
+      alarm_control_panel: |
+        - platform: manual
+          name: Home Alarm
+          code: !secret home_alarm_code
+          code_arm_required: false
+          disarmed:
+            trigger_time: 0
+          armed_night:
+            arming_time: 0
+            delay_time: 0
+
       automations: |
         - id: living_room_smoke_alert
           alias: Living Room Smoke Alert
