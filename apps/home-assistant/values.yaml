@@ -107,6 +107,108 @@ yamlConfigFiles:
             delay_time: 0
 
       automations: |
+        - id: home_alarm_arm_at_night
+          alias: Arm home alarm at night
+          trigger:
+            - platform: time
+              at: "00:00:00"
+          condition:
+            - condition: and
+              conditions:
+                - condition: state
+                  entity_id: alarm_control_panel.home_alarm
+                  state: disarmed
+                - condition: or
+                  conditions:
+                    - condition: state
+                      entity_id: person.alex
+                      state: home
+                    - condition: state
+                      entity_id: person.harleigh
+                      state: home
+          action:
+            - service: alarm_control_panel.alarm_arm_night
+              data:
+                code: !secret home_alarm_code
+              target:
+                entity_id: alarm_control_panel.home_alarm
+
+        - id: home_alarm_disarm_in_morning
+          alias: Disarm alarm in the morning
+          trigger:
+            - platform: time
+              at: "06:30:00"
+          condition:
+            - condition: and
+              conditions:
+                - condition: state
+                  entity_id: alarm_control_panel.home_alarm
+                  state: armed_night
+                - condition: or
+                  conditions:
+                    - condition: state
+                      entity_id: person.alex
+                      state: home
+                    - condition: state
+                      entity_id: person.harleigh
+                      state: home
+          action:
+            - service: alarm_control_panel.alarm_disarm
+              data:
+                code: !secret home_alarm_code
+              target:
+                entity_id: alarm_control_panel.home_alarm
+
+        - id: home_alarm_arm_away_on_departure
+          alias: Arm the away alarm when the last person departs home
+          trigger:
+            - platform: state
+              entity_id:
+                - person.alex
+              to: not_home
+              from: home
+            - platform: state
+              entity_id:
+                - person.harleigh
+              from: home
+              to: not_home
+          condition:
+            - condition: and
+              conditions:
+                - condition: state
+                  entity_id: person.alex
+                  state: not_home
+                - condition: state
+                  entity_id: person.harleigh
+                  state: not_home
+          action:
+            - service: alarm_control_panel.alarm_arm_away
+              target:
+                entity_id: alarm_control_panel.home_alarm
+              data:
+                code: !secret home_alarm_code
+
+        - id: home_alarm_disarm_on_arrival
+          alias: Disarm alarm when anyone arrives home
+          trigger:
+            - platform: state
+              entity_id:
+                - person.alex
+              from: not_home
+              to: home
+            - platform: state
+              entity_id:
+                - person.harleigh
+              from: not_home
+              to: home
+          condition: []
+          action:
+            - service: alarm_control_panel.alarm_disarm
+              target:
+                entity_id: alarm_control_panel.home_alarm
+              data:
+                code: !secret home_alarm_code
+
         - id: home_alarm_alert
           alias: Home alarm alert
           trigger:
