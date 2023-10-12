@@ -84,6 +84,7 @@ configmap:
         homekit: !include static-config/homekit.yaml
         input_number: !include static-config/input_number.yaml
         logger: !include static-config/logger.yaml
+        notify: !include static-config/notify.yaml
         rest_command: !include static-config/rest_command.yaml
         template: !include static-config/templates.yaml
 
@@ -343,6 +344,17 @@ yamlConfigFiles:
 
       logger: |
         default: warning
+
+      notify: |
+        - platform: group
+          name: battery
+          services:
+            - service: mobile_app_alex_s_pixel_6
+
+        - platform: group
+          name: security
+          services:
+            - service: mobile_app_alex_s_pixel_6
 
       rest_command: |
         brewers_friend_publish:
