@@ -94,7 +94,7 @@ yamlConfigFiles:
       alarm_control_panel: |
         - platform: manual
           name: Home Alarm
-          code: "{{ states('input_text.home_alarm_code') }}"
+          code_template: "{{ states('input_text.home_alarm_code') }}"
           disarmed:
             trigger_time: 0
           armed_away:
