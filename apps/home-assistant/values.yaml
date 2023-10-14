@@ -479,6 +479,74 @@ yamlConfigFiles:
               temperature: "{{ states(temperature_sensor) }}"
               specific_gravity: "{{ states(specific_gravity_sensor) }}"
 
+      pagerduty_state_alert: |
+        blueprint:
+          domain: automation
+          name: PagerDuty State Alert
+          description: Send a PagerDuty alert based on a state change
+          input:
+            entities:
+              name: Entities
+              description: Entities that will trigger the alert
+              selector:
+                entity:
+                  multiple: true
+            trigger_state:
+              name: Trigger State
+              description: State that will trigger the alert
+              default: "on"
+            resolve_state:
+              name: Resolve State
+              description: State that will resolve the alert
+              default: "off"
+            alert_message:
+              name: Alert Message
+              description: The message to display in the alert
+            alert_severity:
+              name: Alert Severity
+              description: The severity level of the alert
+              selector:
+                select:
+                  options:
+                    - critical
+                    - error
+                    - warning
+                    - info
+            pagerduty_routing_key_entity_id:
+              name: PagerDuty Routing Key
+              description: Text entity containing the key of the PagerDuty integration to which to route the alerts
+              selector:
+                entity:
+                  domain: input_text
+
+        variables:
+          resolve_state: !input resolve_state
+          alert_message: !input alert_message
+          pagerduty_routing_key_entity_id: !input pagerduty_routing_key_entity_id
+
+        mode: parallel
+
+        trigger:
+          - platform: state
+            entity_id: !input entities
+            to: !input trigger_state
+
+        action:
+          - service: rest_command.pagerduty_entity_trigger
+            data:
+              pagerduty_routing_key: "{{ states(pagerduty_routing_key_entity_id) }}"
+              entity_id: "{{ trigger.entity_id }}"
+              type: "{{ state_attr(trigger.entity_id, 'device_class') }}"
+              summary: "{{ alert_message }} via {{ device_attr(trigger.entity_id, 'name') }}"
+              severity: !input alert_severity
+          - wait_template: "{{ is_state(trigger.entity_id, resolve_state)}}"
+            continue_on_timeout: false
+          - service: rest_command.pagerduty_entity_resolve
+            data:
+              pagerduty_routing_key: "{{ states(pagerduty_routing_key_entity_id) }}"
+              entity_id: "{{ trigger.entity_id }}"
+              type: "{{ state_attr(trigger.entity_id, 'device_class') }}"
+
 service:
   main:
     ports:
