@@ -108,15 +108,6 @@ yamlConfigFiles:
             delay_time: 0
 
       automations: |
-        - id: tilt_green_brewers_friend_publish
-          alias: Tilt Green Brewer's Friend Publish
-          use_blueprint:
-            path: custom/brewers_friend_publish.yaml
-            input:
-              fermenter_name: Green
-              temperature_sensor: sensor.tilt_green_temperature
-              specific_gravity_sensor: sensor.tilt_green_specific_gravity
-              api_key: !secret brewers_friend_api_key
 
       homekit: |
         - name: Home Assistant Bridge
@@ -277,17 +268,18 @@ yamlConfigFiles:
               selector:
                 entity:
                   domain: sensor
-            api_key:
+            api_key_entity_id:
               name: Brewer's Friend API Key
-              description: The API key to use to authenticate with Brewer's Friend
+              description: Text entity containing the API key to use to authenticate with Brewer's Friend
               selector:
-                text:
+                entity:
+                  domain: input_text
 
         variables:
           fermenter_name: !input fermenter_name
           temperature_sensor: !input temperature_sensor
           specific_gravity_sensor: !input specific_gravity_sensor
-          api_key: !input api_key
+          api_key_entity_id: !input api_key_entity_id
 
         trigger:
           - platform: time_pattern
@@ -310,7 +302,7 @@ yamlConfigFiles:
         action:
           - service: rest_command.brewers_friend_publish
             data:
-              api_key: "{{ api_key }}"
+              api_key: "{{ states(api_key_entity_id) }}"
               fermenter_name: "{{ fermenter_name }}"
               temperature: "{{ states(temperature_sensor) }}"
               specific_gravity: "{{ states(specific_gravity_sensor) }}"
