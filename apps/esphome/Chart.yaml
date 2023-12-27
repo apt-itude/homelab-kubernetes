@@ -1,0 +1,15 @@
+apiVersion: v2
+name: esphome
+description: A Helm chart for ESPHome
+type: application
+version: 0.1.0
+appVersion: 2023.12.5
+
+dependencies:
+  - name: common
+    repository: https://library-charts.k8s-at-home.com
+    version: 4.5.2
+
+  - name: onepassword
+    repository: file://../../charts/onepassword
+    version: 0.1.0
