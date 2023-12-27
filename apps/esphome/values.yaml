@@ -29,7 +29,7 @@ service:
   main:
     ports:
       http:
-        port: 6053
+        port: 6052
 
 ingress:
   main:
