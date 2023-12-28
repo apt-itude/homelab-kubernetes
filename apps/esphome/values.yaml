@@ -19,6 +19,7 @@ env:
 persistence:
   config:
     enabled: true
+    size: 10Gi
   usb:
     enabled: true
     mountPath: /dev/bus/usb
