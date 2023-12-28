@@ -10,21 +10,6 @@ service:
         enabled: true
         port: 1883
 
-ingress:
-  main:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: lucys-crib-acme
-    hosts:
-      - host: mqtt.lucyscrib.com
-        paths:
-          - path: /
-            pathType: Prefix
-    tls:
-      - hosts:
-          - mqtt.lucyscrib.com
-        secretName: mqtt-lucys-crib-cert-acme
-
 resources:
   requests:
     cpu: 1m
