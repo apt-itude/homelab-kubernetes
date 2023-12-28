@@ -46,13 +46,6 @@ ingress:
           - esphome.lucyscrib.com
         secretName: esphome-lucys-crib-cert-acme
 
-resources:
-  requests:
-    cpu: 100m
-    memory: 50Mi
-  limits:
-    memory: 50Mi
-
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
