@@ -285,19 +285,7 @@ yamlConfigFiles:
           - platform: time_pattern
             minutes: "/20"
 
-        condition:
-          - condition: and
-            conditions:
-              - condition: not
-                conditions:
-                  - condition: state
-                    entity_id: "{{ temperature_sensor }}"
-                    state: unavailable
-              - condition: not
-                conditions:
-                  - condition: state
-                    entity_id: "{{ specific_gravity_sensor }}"
-                    state: unavailable
+        condition: "{{ not (is_state(temperature_sensor, 'unavailable') or is_state(specific_gravity_sensor, 'unavailable')) }}"
 
         action:
           - service: rest_command.brewers_friend_publish
