@@ -12,6 +12,9 @@ cloudflare:
   enableWarp: true
 
   ingress:
+    argocd.lucyscrib.com:
+      service: http://argocd-server.argocd.svc.cluster.local
+
     unifi.lucyscrib.com:
       service: https://unifi.unifi.svc.cluster.local:8443
       originRequest:
