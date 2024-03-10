@@ -8,6 +8,15 @@ kube-prometheus-stack:
         cpu: 20m
         memory: 50Mi
 
+    prometheusConfigReloader:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 50Mi
+        limits:
+          cpu: 200m
+          memory: 50Mi
+
   prometheus:
     prometheusSpec:
       retention: 14d
@@ -98,7 +107,13 @@ kube-prometheus-stack:
       etcd: false
       configReloaders: false
       general: true
-      k8s: true
+      k8sContainerCpuUsageSecondsTotal: true
+      k8sContainerMemoryCache: true
+      k8sContainerMemoryRss: true
+      k8sContainerMemorySwap: true
+      k8sContainerResource: true
+      k8sContainerMemoryWorkingSetBytes: true
+      k8sPodOwner: true
       kubeApiserverAvailability: false
       kubeApiserverBurnrate: false
       kubeApiserverHistogram: false
