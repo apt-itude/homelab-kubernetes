@@ -1,4 +1,7 @@
 unifi:
+  image:
+    tags: v8.1
+
   service:
     main:
       type: LoadBalancer
