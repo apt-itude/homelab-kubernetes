@@ -138,14 +138,20 @@ yamlConfigFiles:
 
       notify: |
         - platform: group
-          name: battery
+          name: maintenance
           services:
             - service: mobile_app_alex_s_pixel_6
+              data:
+                channel: Maintenance
+                notification_icon: mdi:broom
 
         - platform: group
           name: security
           services:
             - service: mobile_app_alex_s_pixel_6
+              data:
+                channel: Security
+                notification_icon: mdi:security
 
       rest_command: |
         brewers_friend_publish:
