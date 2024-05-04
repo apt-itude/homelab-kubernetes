@@ -138,6 +138,15 @@ yamlConfigFiles:
 
       notify: |
         - platform: group
+          name: emergency
+          services:
+            - service: mobile_app_alex_s_pixel_6
+              data:
+                message: TTS
+                data:
+                  media_stream: alarm_stream_max
+
+        - platform: group
           name: maintenance
           services:
             - service: mobile_app_alex_s_pixel_6
