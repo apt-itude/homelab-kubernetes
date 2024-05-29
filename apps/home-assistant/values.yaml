@@ -268,7 +268,9 @@ yamlConfigFiles:
                 count
               }}
 
-  habits-config: {}
+  habits-config:
+    files:
+      placeholder: ""
 
   blueprints-automation:
     files:
