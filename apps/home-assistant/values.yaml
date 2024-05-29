@@ -41,6 +41,12 @@ persistence:
     readOnly: true
     type: configMap
     name: static-config
+  habits-config:
+    enabled: true
+    mountPath: /config/habits-config
+    readOnly: true
+    type: configMap
+    name: habits-config
   secrets:
     enabled: true
     mountPath: /config/secrets.yaml
@@ -87,6 +93,9 @@ configmap:
         notify: !include static-config/notify.yaml
         rest_command: !include static-config/rest_command.yaml
         template: !include static-config/templates.yaml
+
+        # Managed manually
+        sensor habits: !include_dir_merge_list habits-config/
 
 yamlConfigFiles:
   static-config:
@@ -258,6 +267,8 @@ yamlConfigFiles:
                 list |
                 count
               }}
+
+  habits-config: {}
 
   blueprints-automation:
     files:

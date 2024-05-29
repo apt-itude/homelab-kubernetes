@@ -4,9 +4,13 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ $configmapName }}
+{{- if hasKey $configmapValues "files" }}
 data:
   {{- range $fileName, $fileValues := $configmapValues.files }}
   {{ $fileName }}.yaml: |
     {{ $fileValues | nindent 4 }}
   {{- end }}
+{{- else }}
+data: {}
+{{- end }}
 {{- end }}
