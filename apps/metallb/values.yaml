@@ -8,10 +8,10 @@ metallb:
 
     resources:
       requests:
-        cpu: 5m
+        cpu: 25m
         memory: 200Mi
       limits:
-        cpu: 20m
+        cpu: 50m
         memory: 200Mi
 
   speaker:
