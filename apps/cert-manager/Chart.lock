@@ -1,9 +1,9 @@
 dependencies:
 - name: cert-manager
   repository: https://charts.jetstack.io
-  version: v1.14.4
+  version: v1.16.2
 - name: onepassword
   repository: file://../../charts/onepassword
   version: 0.1.0
-digest: sha256:be21a0177c14bed53cbd5335ab7dad0c7588ed473335896934cce0549e385d05
-generated: "2024-03-10T16:46:20.596579-04:00"
+digest: sha256:392491376ec01d1ace72a43cd00457b11d023a39291a0b82dd49e96423dda04f
+generated: "2024-12-11T20:27:19.530216-05:00"
