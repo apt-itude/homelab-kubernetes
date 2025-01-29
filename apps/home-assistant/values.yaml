@@ -412,6 +412,17 @@ service:
         enabled: true
         port: 5353
         protocol: TCP
+  # Set in the HA local network settings
+  lan:
+    enabled: true
+    type: LoadBalancer
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: 192.168.1.213
+    ports:
+      http:
+        enabled: true
+        port: 8123
+        protocol: TCP
 
 ingress:
   main:
