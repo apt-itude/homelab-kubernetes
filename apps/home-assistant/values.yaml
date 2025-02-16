@@ -27,7 +27,7 @@ persistence:
   config:
     enabled: true
     mountPath: /config
-    size: 1Gi
+    size: 5Gi
   configuration:
     enabled: true
     mountPath: /config/configuration.yaml
