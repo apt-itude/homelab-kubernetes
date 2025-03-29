@@ -28,6 +28,8 @@ persistence:
     enabled: true
     mountPath: /config
     size: 5Gi
+    # Hardcoded to a PV that is restored from a Longhorn backup
+    volumeName: pvc-2a64aea1-ff63-4961-9300-faa1b8d9fd53
   configuration:
     enabled: true
     mountPath: /config/configuration.yaml
