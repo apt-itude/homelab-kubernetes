@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kargo
+description: GitOps Promotion Platform
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: kargo
+    repository: oci://ghcr.io/akuity/kargo-charts
+    version: 1.6.1
