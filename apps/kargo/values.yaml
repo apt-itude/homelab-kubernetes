@@ -27,6 +27,8 @@ kargo:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: lucys-crib-acme
+      tls:
+        selfSignedCert: false
 
   controller:
     # TODO
