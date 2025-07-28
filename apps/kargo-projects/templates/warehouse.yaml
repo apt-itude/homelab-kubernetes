@@ -1,0 +1,19 @@
+{{- range $projectName, $project := .Values.projects }}
+  {{- range $warehouseName, $warehouse := $project.warehouses }}
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: {{ $warehouseName }}
+  namespace: {{ include "kargo.projectName" $projectName }}
+spec:
+  subscriptions:
+    {{- range $repoURL, $imageConfig := ($warehouse.subscriptions.image | default dict) }}
+  - image:
+      repoURL: {{ $repoURL }}
+      {{- with $imageConfig }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
