@@ -1,0 +1,20 @@
+projects:
+  home-assistant:
+    warehouses:
+      images:
+        subscriptions:
+          image:
+            ghcr.io/home-assistant/home-assistant: {}
+
+    promotion:
+      helmAppVersion: {}
+
+  zwave-js-ui:
+    warehouses:
+      images:
+        subscriptions:
+          image:
+            zwavejs/zwave-js-ui: {}
+
+    promotion:
+      helmAppVersion: {}

@@ -1,0 +1,50 @@
+{{- range $projectName, $project := .Values.projects }}
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: prod
+  namespace: {{ include "kargo.projectName" $projectName }}
+spec:
+  requestedFreight:
+  {{- range $warehouseName, $warehouse := $project.warehouses }}
+    - origin:
+        kind: Warehouse
+        name: {{ $warehouseName }}
+      sources:
+        direct: true
+  {{- end }}
+  {{- with $project.promotion }}
+  promotionTemplate:
+    spec:
+      steps:
+        - uses: git-clone
+          config:
+            repoURL: https://github.com/apt-itude/homelab-kubernetes.git
+            checkout:
+            - branch: main
+              path: ./out
+    {{- if hasKey . "helmAppVersion" }}
+      {{- $warehouseName := .helmAppVersion.warehouse | default ($project.warehouses | keys | first) }}
+      {{- $warehouse := get $project.warehouses $warehouseName }}
+      {{- $appVersionImage := .helmAppVersion.image | default ($warehouse.subscriptions.image | keys | first) }}
+        - uses: yaml-update
+          as: update
+          config:
+            path: ./out/apps/{{ $projectName }}/Chart.yaml
+            updates:
+            - key: appVersion
+              value: ${{ "{{" }} imageFrom("{{ $appVersionImage }}", warehouse("{{ $warehouseName }}")).Tag {{ "}}" }}
+    {{- end }}
+        - uses: git-commit
+          as: commit
+          config:
+            path: ./out
+            message: ${{ "{{" }} task.outputs['update'].commitMessage {{ "}}" }}
+        - uses: git-open-pr
+          as: open-pr
+          config:
+            repoURL: https://github.com/apt-itude/homelab-kubernetes.git
+            sourceBranch: main
+  {{- end }}
+{{- end }}
