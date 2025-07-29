@@ -23,7 +23,8 @@ spec:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
             checkout:
             - branch: main
-              path: ./out
+              path: ./repo
+
     {{- if hasKey . "helmAppVersion" }}
       {{- $warehouseName := .helmAppVersion.warehouse | default ($project.warehouses | keys | first) }}
       {{- $warehouse := get $project.warehouses $warehouseName }}
@@ -31,20 +32,29 @@ spec:
         - uses: yaml-update
           as: update
           config:
-            path: ./out/apps/{{ $projectName }}/Chart.yaml
+            path: ./repo/apps/{{ $projectName }}/Chart.yaml
             updates:
             - key: appVersion
               value: ${{ "{{" }} imageFrom("{{ $appVersionImage }}", warehouse("{{ $warehouseName }}")).Tag {{ "}}" }}
     {{- end }}
+
         - uses: git-commit
           as: commit
           config:
-            path: ./out
+            path: ./repo
             message: ${{ "{{" }} outputs['update'].commitMessage {{ "}}" }}
+
+        - uses: git-push
+          as: push
+          config:
+            path: ./repo
+            generateTargetBranch: true
+
         - uses: git-open-pr
           as: open-pr
           config:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
-            sourceBranch: main
+            sourceBranch: ${{ "{{" }} task.outputs.push.branch {{ "}}" }}
+            targetBranch: main
   {{- end }}
 {{- end }}
