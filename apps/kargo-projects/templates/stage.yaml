@@ -40,7 +40,7 @@ spec:
           as: commit
           config:
             path: ./out
-            message: ${{ "{{" }} task.outputs['update'].commitMessage {{ "}}" }}
+            message: ${{ "{{" }} outputs['update'].commitMessage {{ "}}" }}
         - uses: git-open-pr
           as: open-pr
           config:
