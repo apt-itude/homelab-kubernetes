@@ -54,7 +54,7 @@ spec:
           as: open-pr
           config:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
-            sourceBranch: ${{ "{{" }} task.outputs.push.branch {{ "}}" }}
+            sourceBranch: ${{ "{{" }} outputs.push.branch {{ "}}" }}
             targetBranch: main
   {{- end }}
 {{- end }}
