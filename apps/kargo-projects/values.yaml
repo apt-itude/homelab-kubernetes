@@ -4,7 +4,8 @@ projects:
       images:
         subscriptions:
           image:
-            ghcr.io/home-assistant/home-assistant: {}
+            ghcr.io/home-assistant/home-assistant:
+              discoveryLimit: 5
 
     promotion:
       helmAppVersion: {}
@@ -14,7 +15,8 @@ projects:
       images:
         subscriptions:
           image:
-            zwavejs/zwave-js-ui: {}
+            zwavejs/zwave-js-ui:
+              discoveryLimit: 5
 
     promotion:
       helmAppVersion: {}
