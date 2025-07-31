@@ -56,5 +56,18 @@ spec:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
             sourceBranch: ${{ "{{" }} outputs.push.branch {{ "}}" }}
             targetBranch: main
+
+        - uses: git-wait-for-pr
+          as: wait-for-pr
+          config:
+            repoURL: https://github.com/apt-itude/homelab-kubernetes.git
+            prNumber: ${{ "{{" }} outputs['open-pr'].prNumber {{ "}}" }}
+
+        - uses: argocd-update
+          config:
+            apps:
+            - name: {{ $projectName }}
+              sources:
+              - repoURL: https://github.com/apt-itude/homelab-kubernetes.git
   {{- end }}
 {{- end }}
