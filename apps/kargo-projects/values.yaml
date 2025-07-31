@@ -15,7 +15,7 @@ projects:
       images:
         subscriptions:
           image:
-            zwavejs/zwave-js-ui:
+            docker.io/zwavejs/zwave-js-ui:
               discoveryLimit: 5
 
     promotion:
