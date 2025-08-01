@@ -1,4 +1,15 @@
 projects:
+  esphome:
+    warehouses:
+      images:
+        subscriptions:
+          image:
+            ghcr.io/esphome/esphome:
+              discoveryLimit: 5
+
+    promotion:
+      helmAppVersion: {}
+
   home-assistant:
     warehouses:
       images:
