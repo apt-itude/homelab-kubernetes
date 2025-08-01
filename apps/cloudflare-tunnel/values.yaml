@@ -15,6 +15,9 @@ cloudflare:
     argocd.lucyscrib.com:
       service: http://argocd-server.argocd.svc.cluster.local
 
+    kargo.lucyscrib.com:
+      service: http://kargo-api.kargo.svc.cluster.local
+
     unifi.lucyscrib.com:
       service: https://unifi.unifi.svc.cluster.local:8443
       originRequest:
