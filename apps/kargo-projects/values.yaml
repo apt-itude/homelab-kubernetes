@@ -32,6 +32,18 @@ projects:
     promotion:
       helmAppVersion: {}
 
+  rtlamr2mqtt:
+    warehouses:
+      images:
+        subscriptions:
+          image:
+            docker.io/allangood/rtlamr2mqtt:
+              discoveryLimit: 5
+              semverConstraint: ^2
+
+    promotion:
+      helmAppVersion: {}
+
   zwave-js-ui:
     warehouses:
       images:
