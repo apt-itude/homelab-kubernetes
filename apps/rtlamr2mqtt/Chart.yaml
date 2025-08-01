@@ -3,7 +3,7 @@ name: rtlamr2mqtt
 description: A Helm chart for rtlamr2mqtt
 type: application
 version: 0.1.0
-appVersion: 2.3.3
+appVersion: 2.3.4
 
 dependencies:
   - name: common
