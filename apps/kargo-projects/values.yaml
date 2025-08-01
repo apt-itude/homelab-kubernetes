@@ -21,6 +21,17 @@ projects:
     promotion:
       helmAppVersion: {}
 
+  mosquitto:
+    warehouses:
+      images:
+        subscriptions:
+          image:
+            docker.io/eclipse-mosquitto:
+              discoveryLimit: 5
+
+    promotion:
+      helmAppVersion: {}
+
   zwave-js-ui:
     warehouses:
       images:
