@@ -24,6 +24,7 @@ projects:
   mosquitto:
     warehouses:
       images:
+        interval: 6h
         subscriptions:
           image:
             docker.io/eclipse-mosquitto:
@@ -35,6 +36,7 @@ projects:
   rtlamr2mqtt:
     warehouses:
       images:
+        interval: 6h
         subscriptions:
           image:
             docker.io/allangood/rtlamr2mqtt:
@@ -47,6 +49,7 @@ projects:
   zwave-js-ui:
     warehouses:
       images:
+        interval: 6h
         subscriptions:
           image:
             docker.io/zwavejs/zwave-js-ui:

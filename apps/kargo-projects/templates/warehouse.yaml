@@ -7,6 +7,9 @@ metadata:
   name: {{ $warehouseName }}
   namespace: {{ include "kargo.projectName" $projectName }}
 spec:
+    {{- with $warehouse.interval }}
+  interval: {{ . }}
+    {{- end }}
   subscriptions:
     {{- range $repoURL, $imageConfig := ($warehouse.subscriptions.image | default dict) }}
   - image:
