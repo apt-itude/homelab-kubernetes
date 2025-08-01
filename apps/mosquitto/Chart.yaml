@@ -3,7 +3,7 @@ name: mosquitto
 description: Eclipse Mosquitto - An open source MQTT broker
 type: application
 version: 0.1.0
-appVersion: 2.0.17
+appVersion: 2.0.22
 
 dependencies:
   - name: common
