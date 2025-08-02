@@ -1,6 +1,6 @@
 unifi:
   image:
-    tag: v8.1
+    tag: v9.3.43
 
   service:
     main:
@@ -42,7 +42,7 @@ unifi:
     enabled: true
 
     image:
-      tag: 5.0.20-debian-11-r0
+      tag: 5.0.24
 
     useStatefulSet: true
 
