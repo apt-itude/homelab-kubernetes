@@ -46,6 +46,25 @@ projects:
     promotion:
       helmAppVersion: {}
 
+  unifi:
+    warehouses:
+      images:
+        interval: 6h
+        subscriptions:
+          image:
+            docker.io/jacobalberty/unifi:
+              discoveryLimit: 5
+              semverConstraint: ^9
+            docker.io/bitnami/mongodb:
+              discoveryLimit: 5
+              semverConstraint: ^5
+    promotion:
+      helmImageTags:
+        docker.io/jacobalberty/unifi:
+          key: unifi.image.tag
+        docker.io/bitnami/mongodb:
+          key: unifi.mongodb.image.tag
+
   zwave-js-ui:
     warehouses:
       images:
