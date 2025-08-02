@@ -36,6 +36,19 @@ spec:
             updates:
             - key: appVersion
               value: ${{ "{{" }} imageFrom("{{ $appVersionImage }}", warehouse("{{ $warehouseName }}")).Tag {{ "}}" }}
+    {{- else if hasKey . "helmImageTags" }}
+        - uses: yaml-update
+          as: update
+          config:
+            path: ./repo/apps/{{ $projectName }}/values.yaml
+            updates:
+      {{- range $image, $imageConfig := .helmImageTags }}
+        {{- $warehouseName := $imageConfig.warehouse | default ($project.warehouses | keys | first) }}
+            - key: {{ $imageConfig.key }}
+              value: ${{ "{{" }} imageFrom("{{ $image }}", warehouse("{{ $warehouseName }}")).Tag {{ "}}" }}
+      {{- end }}
+    {{- else }}
+      {{- fail "promotion must contain helmAppVersion or helmImageTags" }}
     {{- end }}
 
         - uses: git-commit
