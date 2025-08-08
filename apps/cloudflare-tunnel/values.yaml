@@ -31,7 +31,6 @@ replicaCount: 2
 image:
   repository: cloudflare/cloudflared
   pullPolicy: IfNotPresent
-  tag: "2023.8.1"
 
 imagePullSecrets: []
 nameOverride: ""
