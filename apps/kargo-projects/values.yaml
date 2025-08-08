@@ -1,4 +1,16 @@
 projects:
+  cloudflare-tunnel:
+    warehouses:
+      images:
+        subscriptions:
+          image:
+            docker.io/cloudflare/cloudflared:
+              discoveryLimit: 5
+              # No pre-releases
+              allowTags: ^\d{4}.\d{1,2}.\d+$
+    promotion:
+      helmAppVersion: {}
+
   esphome:
     warehouses:
       images:
