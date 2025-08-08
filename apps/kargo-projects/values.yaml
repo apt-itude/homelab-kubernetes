@@ -6,7 +6,8 @@ projects:
           image:
             ghcr.io/esphome/esphome:
               discoveryLimit: 5
-
+              # No pre-releases
+              allowTags: ^\d{4}.\d{1,2}.\d+$
     promotion:
       helmAppVersion: {}
 
@@ -17,7 +18,8 @@ projects:
           image:
             ghcr.io/home-assistant/home-assistant:
               discoveryLimit: 5
-
+              # No pre-releases
+              allowTags: ^\d{4}.\d{1,2}.\d+$
     promotion:
       helmAppVersion: {}
 
@@ -29,7 +31,6 @@ projects:
           image:
             docker.io/eclipse-mosquitto:
               discoveryLimit: 5
-
     promotion:
       helmAppVersion: {}
 
@@ -42,7 +43,6 @@ projects:
             docker.io/allangood/rtlamr2mqtt:
               discoveryLimit: 5
               semverConstraint: ^2
-
     promotion:
       helmAppVersion: {}
 
