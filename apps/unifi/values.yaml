@@ -1,6 +1,6 @@
 unifi:
   image:
-    tag: v9.3.43
+    tag: v9.3.45
 
   service:
     main:
