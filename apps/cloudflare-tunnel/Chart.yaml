@@ -3,7 +3,7 @@ name: cloudflare-tunnel
 description: A Helm chart for Cloudflare Tunnel
 type: application
 version: 0.1.0
-appVersion: 2025.7.0
+appVersion: 2025.8.1
 
 dependencies:
   - name: onepassword
