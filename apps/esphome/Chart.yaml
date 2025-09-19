@@ -3,7 +3,7 @@ name: esphome
 description: A Helm chart for ESPHome
 type: application
 version: 0.1.0
-appVersion: 2025.8.0
+appVersion: 2025.9.1
 
 dependencies:
   - name: common
