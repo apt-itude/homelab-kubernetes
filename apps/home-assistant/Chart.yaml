@@ -3,7 +3,7 @@ name: home-assistant
 description: A Helm chart for Home Assistant
 type: application
 version: 0.1.0
-appVersion: 2025.10.4
+appVersion: 2025.11.1
 
 dependencies:
   - name: common
