@@ -1,0 +1,18 @@
+longhorn:
+  defaultSettings:
+    backupTarget: s3://homelab-volume-backups@us-east-2/longhorn
+    backupTargetCredentialSecret: aws-creds
+    createDefaultDiskLabeledNodes: true
+    defaultReplicaCount: 1
+    concurrentAutomaticEngineUpgradePerNodeLimit: 3
+
+  persistence:
+    defaultClassReplicaCount: 1
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: lucys-crib-acme
+    host: longhorn.lucyscrib.com
+    tls: true
+    tlsSecret: longhorn-lucys-crib-cert-acme
