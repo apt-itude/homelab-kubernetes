@@ -406,7 +406,7 @@ service:
     annotations:
       metallb.universe.tf/loadBalancerIPs: 192.168.1.213
     ports:
-      http:
+      lan-http:
         enabled: true
         port: 8123
         protocol: TCP
