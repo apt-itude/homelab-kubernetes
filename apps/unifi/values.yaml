@@ -37,8 +37,7 @@ unifi:
       enabled: true
       accessMode: ReadWriteOnce
       size: 1Gi
-      # Restored from backup 03/11/26
-      volumeName: pvc-c2332913-d16d-49b3-a262-082ef7795c17
+      volumeName: unifi-data-restored-20260311
 
   mongodb:
     enabled: true
