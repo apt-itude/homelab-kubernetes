@@ -37,7 +37,6 @@ unifi:
       enabled: true
       accessMode: ReadWriteOnce
       size: 1Gi
-      volumeName: unifi-data-restored-20260311
 
   mongodb:
     enabled: true
