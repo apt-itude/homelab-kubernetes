@@ -24,12 +24,6 @@ persistence:
     type: secret
     name: esphome-secrets
     subPath: secrets.yaml
-  bluetooth-proxy-brewery:
-    enabled: true
-    mountPath: /config/bluetooth-proxy-brewery.yaml
-    readOnly: true
-    type: configMap
-    name: bluetooth-proxy-brewery
 
 resources:
   requests:
@@ -58,39 +52,6 @@ ingress:
       - hosts:
           - esphome.lucyscrib.com
         secretName: esphome-lucys-crib-cert-acme
-
-yamlConfigFiles:
-  static-config:
-    files:
-      bluetooth-proxy-brewery: |
-        substitutions:
-          name: bluetooth-proxy-brewery
-
-        esphome:
-          name: ${name}
-
-        esp32:
-          variant: esp32
-          framework:
-            type: esp-idf
-
-        wifi:
-          ssid: !secret wifi_ssid
-          password: !secret wifi_password
-
-        # Enable logging
-        logger:
-
-        # Enable Home Assistant API
-        api:
-
-        ota:
-          platform: esphome
-
-        esp32_ble_tracker:
-
-        bluetooth_proxy:
-          active: true
 
 onepassword:
   items:
