@@ -51,6 +51,7 @@ configmap:
         wifi:
           ssid: !secret wifi_ssid
           password: !secret wifi_password
+          use_address: 10.0.0.191
 
         # Enable logging
         logger:
@@ -60,6 +61,7 @@ configmap:
 
         ota:
           platform: esphome
+          password: !secret bluetooth_proxy_brewery_password
 
         esp32_ble_tracker:
 
