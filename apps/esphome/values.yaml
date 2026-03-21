@@ -109,13 +109,13 @@ external-secrets:
         enabled: true
         keys:
           wifi_ssid:
-            item: "Lucy's Things Network"
+            item: "lucys-things-network"
             field: "network name"
           wifi_password:
-            item: "Lucy's Things Network"
+            item: "lucys-things-network"
             field: "wireless network password"
           bluetooth_proxy_brewery_password:
-            item: "Bluetooth Proxy - Brewery"
+            item: "bluetooth-proxy-brewery"
             field: "password"
         templateKeys:
           secrets.yaml: |
