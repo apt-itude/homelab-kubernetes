@@ -9,3 +9,6 @@ external-secrets:
   webhook:
     certManager:
       enabled: true
+      cert:
+        issuerRef:
+          name: external-secrets-selfsigned
