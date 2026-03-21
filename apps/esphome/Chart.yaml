@@ -13,3 +13,7 @@ dependencies:
   - name: onepassword
     repository: file://../../charts/onepassword
     version: 0.1.0
+
+  - name: external-secrets
+    repository: file://../../charts/external-secrets
+    version: 0.1.0

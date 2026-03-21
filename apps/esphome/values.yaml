@@ -101,6 +101,24 @@ onepassword:
     login-creds:
       enabled: true
       item: esphome-creds
-    esphome-secrets:
-      enabled: true
-      item: esphome-secrets
+
+external-secrets:
+  onepassword:
+    secrets:
+      esphome-secrets:
+        enabled: true
+        keys:
+          wifi_ssid:
+            item: "Lucy's Things Network"
+            field: "network name"
+          wifi_password:
+            item: "Lucy's Things Network"
+            field: "wireless network password"
+          bluetooth_proxy_brewery_password:
+            item: "Bluetooth Proxy - Brewery"
+            field: "password"
+        templateKeys:
+          secrets.yaml: |
+            wifi_ssid: {{ .wifi_ssid }}
+            wifi_password: {{ .wifi_password }}
+            bluetooth_proxy_brewery_password: {{ .bluetooth_proxy_brewery_password }}
