@@ -10,6 +10,6 @@ dependencies:
     repository: https://library-charts.k8s-at-home.com
     version: 4.5.2
 
-  - name: onepassword
-    repository: file://../../charts/onepassword
+  - name: external-secrets
+    repository: file://../../charts/external-secrets
     version: 0.1.0
