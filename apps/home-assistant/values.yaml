@@ -426,8 +426,23 @@ ingress:
           - homeassistant.lucyscrib.com
         secretName: homeassistant-lucys-crib-cert-acme
 
-onepassword:
-  items:
-    home-assistant-secrets:
-      enabled: true
-      item: home-assistant-secrets
+external-secrets:
+  onepassword:
+    secrets:
+      home-assistant-secrets:
+        enabled: true
+        keys:
+          home_alarm_code:
+            item: home-assistant-alarm-master-code
+            field: code
+          pagerduty_routing_key:
+            item: home-assistant-pagerduty-creds
+            field: routing-key
+          brewers_friend_api_key:
+            item: home-assistant-brewers-friend-creds
+            field: api-key
+        templateKeys:
+          secrets.yaml: |
+            home_alarm_code: {{ .home_alarm_code }}
+            pagerduty_routing_key: {{ .pagerduty_routing_key }}
+            brewers_friend_api_key: {{ .brewers_friend_api_key }}
