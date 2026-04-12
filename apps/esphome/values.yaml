@@ -99,7 +99,7 @@ ingress:
 external-secrets:
   onepassword:
     secrets:
-      esphome-creds:
+      login-creds:
         enabled: true
         keys:
           username:
