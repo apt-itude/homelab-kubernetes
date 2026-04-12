@@ -96,15 +96,19 @@ ingress:
           - esphome.lucyscrib.com
         secretName: esphome-lucys-crib-cert-acme
 
-onepassword:
-  items:
-    login-creds:
-      enabled: true
-      item: esphome-creds
-
 external-secrets:
   onepassword:
     secrets:
+      esphome-creds:
+        enabled: true
+        keys:
+          username:
+            item: esphome-creds
+            field: username
+          password:
+            item: esphome-creds
+            field: password
+
       esphome-secrets:
         enabled: true
         keys:
