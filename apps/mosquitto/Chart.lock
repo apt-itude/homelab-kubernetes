@@ -2,8 +2,5 @@ dependencies:
 - name: common
   repository: https://library-charts.k8s-at-home.com
   version: 4.5.2
-- name: onepassword
-  repository: file://../../charts/onepassword
-  version: 0.1.0
-digest: sha256:9289d792ddf507c9246f44ccb739883a1bb5cf7eee748d623df23d8fd44d388e
-generated: "2023-09-08T17:15:55.332366-04:00"
+digest: sha256:408d12aa9bbce6dfd4ced5c2586d92dfa518821e01823081fa9a141243b3160c
+generated: "2026-04-18T10:12:59.78459-04:00"

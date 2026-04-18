@@ -35,8 +35,15 @@ kargo:
       warehouses:
         minReconciliationInterval: 30m
 
-onepassword:
-  items:
-    admin-creds:
-      enabled: true
-      item: kargo-admin-creds
+external-secrets:
+  onepassword:
+    secrets:
+      admin-creds:
+        enabled: true
+        keys:
+          ADMIN_ACCOUNT_PASSWORD_HASH:
+            item: kargo-admin-creds
+            field: ADMIN_ACCOUNT_PASSWORD_HASH
+          ADMIN_ACCOUNT_TOKEN_SIGNING_KEY:
+            item: kargo-admin-creds
+            field: ADMIN_ACCOUNT_TOKEN_SIGNING_KEY

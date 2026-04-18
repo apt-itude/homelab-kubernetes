@@ -61,12 +61,18 @@ tolerations: []
 
 affinity: {}
 
-onepassword:
-  items:
-    lucyscrib-tunnel-creds:
-      enabled: true
-      item: cloudflared-lucyscrib-tunnel-creds
-
-    lucyscrib-tunnel-origin:
-      enabled: true
-      item: cloudflared-lucyscrib-tunnel-origin
+external-secrets:
+  onepassword:
+    secrets:
+      lucyscrib-tunnel-creds:
+        enabled: true
+        keys:
+          credential:
+            item: cloudflared-lucyscrib-tunnel-creds
+            field: credential
+      lucyscrib-tunnel-origin:
+        enabled: true
+        keys:
+          cert.pem:
+            item: cloudflared-lucyscrib-tunnel-origin
+            field: cert.pem

@@ -1,6 +1,6 @@
 dependencies:
-- name: onepassword
-  repository: file://../../charts/onepassword
+- name: external-secrets
+  repository: file://../../charts/external-secrets
   version: 0.1.0
-digest: sha256:2aef75ca6f923640064ce1645814bd3afd325f4e0e52e6dd5e70b6f20c5b0dd7
-generated: "2023-09-04T10:59:14.929584-04:00"
+digest: sha256:0dbd24b02907940c3797cad2a7a1a787dc3f16f971e257f24336efca831c6ab4
+generated: "2026-04-18T10:21:20.536779-04:00"

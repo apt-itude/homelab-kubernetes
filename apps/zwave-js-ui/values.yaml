@@ -138,11 +138,30 @@ ingress:
           - zwave-server.lucyscrib.com
         secretName: zwave-server-lucys-crib-cert-acme
 
-onepassword:
-  items:
-    zwave:
-      enabled: true
-      item: ZWave
-    zwave-default-creds:
-      enabled: true
-      item: zwave-js-ui
+external-secrets:
+  onepassword:
+    secrets:
+      zwave:
+        enabled: true
+        keys:
+          KEY_S0_Legacy:
+            item: ZWave
+            field: KEY_S0_Legacy
+          KEY_S2_Unauthenticated:
+            item: ZWave
+            field: KEY_S2_Unauthenticated
+          KEY_S2_Authenticated:
+            item: ZWave
+            field: KEY_S2_Authenticated
+          KEY_S2_AccessControl:
+            item: ZWave
+            field: KEY_S2_AccessControl
+      zwave-default-creds:
+        enabled: true
+        keys:
+          username:
+            item: zwave-js-ui
+            field: username
+          password:
+            item: zwave-js-ui
+            field: password
