@@ -31,8 +31,12 @@ cert-manager:
         cpu: 10m
         memory: 50Mi
 
-onepassword:
-  items:
-    cloudflare-api-token-lucyscrib:
-      enabled: true
-      item: cert-manager-cloudflare-api-token-lucyscrib
+external-secrets:
+  onepassword:
+    secrets:
+      cloudflare-api-token-lucyscrib:
+        enabled: true
+        keys:
+          credential:
+            item: cert-manager-cloudflare-api-token-lucyscrib
+            field: credential

@@ -9,6 +9,6 @@ dependencies:
     repository: https://charts.jetstack.io
     version: v1.16.2
 
-  - name: onepassword
-    repository: file://../../charts/onepassword
+  - name: external-secrets
+    repository: file://../../charts/external-secrets
     version: 0.1.0
