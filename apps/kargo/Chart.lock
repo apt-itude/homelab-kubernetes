@@ -2,8 +2,8 @@ dependencies:
 - name: kargo
   repository: oci://ghcr.io/akuity/kargo-charts
   version: 1.6.1
-- name: onepassword
-  repository: file://../../charts/onepassword
+- name: external-secrets
+  repository: file://../../charts/external-secrets
   version: 0.1.0
-digest: sha256:1154aac63f446f394c2513529288d8869bfc78c339b8323273254935273ae831
-generated: "2025-07-26T08:39:56.530512-04:00"
+digest: sha256:f7ac40bd4d48b3e15477e90dd2a2bce18da2410fb734949eecf41bc584ec2c37
+generated: "2026-04-18T10:21:48.576145-04:00"
