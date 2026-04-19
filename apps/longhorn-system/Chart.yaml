@@ -8,3 +8,7 @@ dependencies:
   - name: longhorn
     repository: https://charts.longhorn.io
     version: 1.8.2
+
+  - name: external-secrets
+    repository: file://../../charts/external-secrets
+    version: 0.1.0

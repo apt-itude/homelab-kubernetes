@@ -20,3 +20,16 @@ longhorn:
     host: longhorn.lucyscrib.com
     tls: true
     tlsSecret: longhorn-lucys-crib-cert-acme
+
+external-secrets:
+  onepassword:
+    secrets:
+      aws-creds:
+        enabled: true
+        keys:
+          AWS_ACCESS_KEY_ID:
+            item: longhorn-aws-creds
+            field: AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY:
+            item: longhorn-aws-creds
+            field: AWS_SECRET_ACCESS_KEY
