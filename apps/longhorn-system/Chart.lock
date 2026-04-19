@@ -2,5 +2,8 @@ dependencies:
 - name: longhorn
   repository: https://charts.longhorn.io
   version: 1.8.2
-digest: sha256:a1a59aac895612f3512e8153dea4b0b1c1d891ca890b1f01618e2feb5a9f75cd
-generated: "2026-03-08T19:33:30.530406-04:00"
+- name: external-secrets
+  repository: file://../../charts/external-secrets
+  version: 0.1.0
+digest: sha256:77e68d607a85920e02a7e29a65e2a2f763057541df6a45536c4594ed75e48e20
+generated: "2026-04-19T11:04:12.480384-04:00"
