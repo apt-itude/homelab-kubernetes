@@ -14,6 +14,7 @@ metadata:
   annotations: {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  refreshInterval: 6h0m0s
   secretStoreRef:
     kind: ClusterSecretStore
     name: {{ $store }}
