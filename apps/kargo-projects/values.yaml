@@ -49,18 +49,6 @@ projects:
     promotion:
       helmAppVersion: {}
 
-  rtlamr2mqtt:
-    warehouses:
-      images:
-        interval: 6h
-        subscriptions:
-          image:
-            docker.io/allangood/rtlamr2mqtt:
-              discoveryLimit: 5
-              semverConstraint: ^2
-    promotion:
-      helmAppVersion: {}
-
   unifi:
     warehouses:
       images:
