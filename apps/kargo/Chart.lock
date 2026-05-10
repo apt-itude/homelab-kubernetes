@@ -1,9 +1,9 @@
 dependencies:
 - name: kargo
   repository: oci://ghcr.io/akuity/kargo-charts
-  version: 1.6.1
+  version: 1.7.10
 - name: external-secrets
   repository: file://../../charts/external-secrets
   version: 0.1.0
-digest: sha256:f7ac40bd4d48b3e15477e90dd2a2bce18da2410fb734949eecf41bc584ec2c37
-generated: "2026-04-18T10:21:48.576145-04:00"
+digest: sha256:83398a505814d0a54eb46d254c40f9d09f29fb9c141f7fbc660ab58451e8b2f1
+generated: "2026-05-10T15:50:10.186823-04:00"
