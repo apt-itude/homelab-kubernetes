@@ -7,7 +7,7 @@ version: 0.1.0
 dependencies:
   - name: kargo
     repository: oci://ghcr.io/akuity/kargo-charts
-    version: 1.7.10
+    version: 1.10.3
 
   - name: external-secrets
     repository: file://../../charts/external-secrets
