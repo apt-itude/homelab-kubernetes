@@ -71,11 +71,13 @@ spec:
             sourceBranch: ${{ "{{" }} outputs.push.branch {{ "}}" }}
             targetBranch: main
 
-        - uses: git-wait-for-pr
-          as: wait-for-pr
+        - uses: git-merge-pr
+          as: merge-pr
           config:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
             prNumber: ${{ "{{" }} outputs['open-pr'].pr.id {{ "}}" }}
+            mergeMethod: squash
+            wait: true
 
         - uses: argocd-update
           as: argocd-update
