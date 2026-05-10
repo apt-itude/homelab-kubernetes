@@ -19,6 +19,7 @@ spec:
     spec:
       steps:
         - uses: git-clone
+          as: clone
           config:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
             checkout:
@@ -77,6 +78,7 @@ spec:
             prNumber: ${{ "{{" }} outputs['open-pr'].pr.id {{ "}}" }}
 
         - uses: argocd-update
+          as: argocd-update
           config:
             apps:
             - name: {{ $projectName }}
