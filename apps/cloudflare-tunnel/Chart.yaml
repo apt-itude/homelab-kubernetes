@@ -3,7 +3,7 @@ name: cloudflare-tunnel
 description: A Helm chart for Cloudflare Tunnel
 type: application
 version: 0.1.0
-appVersion: 2026.3.0
+appVersion: 2026.8.2
 
 dependencies:
   - name: external-secrets
