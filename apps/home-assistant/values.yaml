@@ -74,7 +74,6 @@ configmap:
         script: !include scripts.yaml
 
         # Managed via gitops
-        alarm_control_panel: !include static-config/alarm_control_panel.yaml
         automation static: !include static-config/automations.yaml
         homekit: !include static-config/homekit.yaml
         input_number: !include static-config/input_number.yaml
@@ -86,22 +85,6 @@ configmap:
 yamlConfigFiles:
   static-config:
     files:
-      alarm_control_panel: |
-        - platform: manual
-          name: Home Alarm
-          code_template: "{{ states('input_text.home_alarm_code') }}"
-          disarmed:
-            trigger_time: 0
-          armed_away:
-            arming_time: 60
-            delay_time: 30
-          armed_home:
-            arming_time: 0
-            delay_time: 30
-          armed_night:
-            arming_time: 0
-            delay_time: 0
-
       automations: |
 
       homekit: |
