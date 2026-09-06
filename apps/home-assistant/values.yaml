@@ -157,6 +157,19 @@ yamlConfigFiles:
               "gravity_unit": "G"
             }
 
+        beerwright_publish:
+          url: "https://app.beerwright.com/api/ingest/{{ device_id }}"
+          method: POST
+          content_type: "application/json; charset=utf-8"
+          payload: |
+            {
+              "name": "HomeAssistant {{ fermenter_name }}",
+              "temp": "{{ temperature }}",
+              "temp_unit": "F",
+              "gravity": "{{ specific_gravity }}",
+              "gravity_unit": "G"
+            }
+
         pagerduty_trigger:
           url: "https://events.pagerduty.com/v2/enqueue"
           method: POST
@@ -286,6 +299,57 @@ yamlConfigFiles:
           - service: rest_command.brewers_friend_publish
             data:
               api_key: "{{ states(api_key_entity_id) }}"
+              fermenter_name: "{{ fermenter_name }}"
+              temperature: "{{ states(temperature_sensor) }}"
+              specific_gravity: "{{ states(specific_gravity_sensor) }}"
+
+      beerwright_publish: |
+        blueprint:
+          domain: automation
+          name: Beerwright Publish
+          description: Publish temperature and specific gravity data to Beerwright
+          input:
+            fermenter_name:
+              name: Fermenter Name
+              description: The name that will appear for the device in Beerwright
+              selector:
+                text:
+            temperature_sensor:
+              name: Temperature Sensor
+              description: The sensor to get temperature data from
+              selector:
+                entity:
+                  domain: sensor
+                  device_class: temperature
+            specific_gravity_sensor:
+              name: Specific Gravity Sensor
+              description: The sensor to get specific gravity data from
+              selector:
+                entity:
+                  domain: sensor
+            device_id_entity_id:
+              name: Beerwright Device ID
+              description: Text entity containing the device ID from the Beerwright ingest URL
+              selector:
+                entity:
+                  domain: input_text
+
+        variables:
+          fermenter_name: !input fermenter_name
+          temperature_sensor: !input temperature_sensor
+          specific_gravity_sensor: !input specific_gravity_sensor
+          device_id_entity_id: !input device_id_entity_id
+
+        trigger:
+          - platform: time_pattern
+            minutes: "/20"
+
+        condition: "{{ not (is_state(temperature_sensor, 'unavailable') or is_state(specific_gravity_sensor, 'unavailable')) }}"
+
+        action:
+          - service: rest_command.beerwright_publish
+            data:
+              device_id: "{{ states(device_id_entity_id) }}"
               fermenter_name: "{{ fermenter_name }}"
               temperature: "{{ states(temperature_sensor) }}"
               specific_gravity: "{{ states(specific_gravity_sensor) }}"
