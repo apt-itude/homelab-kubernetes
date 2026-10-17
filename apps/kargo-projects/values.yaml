@@ -1,4 +1,16 @@
 projects:
+  cert-manager:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            cert-manager:
+              repoURL: https://charts.jetstack.io
+              semverConstraint: ^1.0.0
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
+
   cloudflare-tunnel:
     warehouses:
       images:
