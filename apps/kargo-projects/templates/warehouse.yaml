@@ -18,5 +18,13 @@ spec:
       {{- toYaml . | nindent 6 }}
       {{- end }}
     {{- end }}
+    {{- range $chartName, $chartConfig := ($warehouse.subscriptions.chart | default dict) }}
+  - chart:
+      repoURL: {{ $chartConfig.repoURL | required "repoURL is required for chart subscription" }}
+      name: {{ $chartName }}
+      {{- with (omit $chartConfig "repoURL") }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
+    {{- end }}
   {{- end }}
 {{- end }}
