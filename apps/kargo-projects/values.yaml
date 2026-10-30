@@ -24,6 +24,18 @@ projects:
     promotion:
       helmAppVersion: {}
 
+  coredns-k8s-gateway:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            k8s-gateway:
+              repoURL: https://ori-edge.github.io/k8s_gateway/
+              semverConstraint: ^2.0.0
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
+
   esphome:
     warehouses:
       images:
@@ -36,6 +48,18 @@ projects:
                 - ^\d{4}.\d{1,2}.\d+$
     promotion:
       helmAppVersion: {}
+
+  external-secrets:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            external-secrets:
+              repoURL: https://charts.external-secrets.io
+              semverConstraint: ^2.0.0
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
 
   home-assistant:
     warehouses:
@@ -50,6 +74,30 @@ projects:
     promotion:
       helmAppVersion: {}
 
+  longhorn-system:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            longhorn:
+              repoURL: https://charts.longhorn.io
+              semverConstraint: ^1.0.0
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
+
+  metallb:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            metallb:
+              repoURL: https://metallb.github.io/metallb
+              semverConstraint: ^0.0.0
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
+
   mosquitto:
     warehouses:
       images:
@@ -59,7 +107,17 @@ projects:
             docker.io/eclipse-mosquitto:
               discoveryLimit: 5
     promotion:
-      helmAppVersion: {}
+
+  prometheus:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            kube-prometheus-stack:
+              repoURL: https://prometheus-community.github.io/helm-charts
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
 
   unifi:
     warehouses:
