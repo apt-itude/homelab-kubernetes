@@ -2,6 +2,9 @@ external-secrets:
   crds:
     annotations:
       argocd.argoproj.io/sync-wave: "-1"
+      # The SecretStore/ClusterSecretStore CRDs exceed the 256 KiB annotation limit that
+      # client-side apply's last-applied-configuration hits, so they must be server-side applied.
+      argocd.argoproj.io/sync-options: ServerSideApply=true
 
   serviceMonitor:
     enabled: true
