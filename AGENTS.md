@@ -36,12 +36,12 @@ Never commit secrets. Apps declare 1Password-backed secrets in their own `values
 ## Kargo automation (the non-obvious part)
 `apps/kargo-projects/values.yaml` is the source of truth for automated version bumps. Each entry creates a Kargo project named `kargo-<app>` that watches an upstream image or chart, opens a **squash-merged PR** against this repo, then syncs Argo CD. The `promotion` type decides what gets edited:
 - `helmAppVersion` → `apps/<app>/Chart.yaml` `appVersion`
-- `helmChartVersion` → `apps/<app>/Chart.yaml` `version` (for mirrored charts, e.g. cert-manager)
+- `helmChartVersion` → the upstream entry under `dependencies` in `apps/<app>/Chart.yaml`, plus `Chart.lock` (Kargo's `helm-update-chart` step). The subscription's `repoURL` and chart name must exactly match that dependency's `repository` and `name`.
 - `helmImageTags` → image tags in `apps/<app>/values.yaml`
 
 Implications:
-- For Kargo-managed apps, `appVersion`/`version` and the tagged image values are **bot-owned**. Don't hand-edit them or fight bot PRs — change the subscription in `apps/kargo-projects/values.yaml` instead.
-- A new app gets auto-updates only after adding a matching entry there. `promotion` must contain exactly one of the three keys (the `fail` message in `stage.yaml` mentions only two — it's stale).
+- For Kargo-managed apps, `appVersion`, the subscribed dependency's version (and `Chart.lock`), and the tagged image values are **bot-owned**. Don't hand-edit them or fight bot PRs — change the subscription in `apps/kargo-projects/values.yaml` instead.
+- A new app gets auto-updates only after adding a matching entry there. `promotion` must contain exactly one of the three keys.
 - Bot commits say `./repo/apps/<app>/...` because Kargo clones into `./repo` before editing; the real path is `apps/<app>/...`.
 
 ## Conventions
