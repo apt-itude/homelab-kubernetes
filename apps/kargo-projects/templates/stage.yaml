@@ -79,12 +79,14 @@ spec:
 
         - uses: git-push
           as: push
+          if: ${{ "{{" }} status('commit') != 'Skipped' {{ "}}" }}
           config:
             path: ./repo
             generateTargetBranch: true
 
         - uses: git-open-pr
           as: open-pr
+          if: ${{ "{{" }} status('push') != 'Skipped' {{ "}}" }}
           config:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
             sourceBranch: ${{ "{{" }} outputs.push.branch {{ "}}" }}
@@ -92,6 +94,7 @@ spec:
 
         - uses: git-merge-pr
           as: merge-pr
+          if: ${{ "{{" }} status('open-pr') != 'Skipped' {{ "}}" }}
           config:
             repoURL: https://github.com/apt-itude/homelab-kubernetes.git
             prNumber: ${{ "{{" }} outputs['open-pr'].pr.id {{ "}}" }}
