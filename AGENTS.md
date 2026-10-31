@@ -36,7 +36,7 @@ Never commit secrets. Apps declare 1Password-backed secrets in their own `values
 ## Kargo automation (the non-obvious part)
 `apps/kargo-projects/values.yaml` is the source of truth for automated version bumps. Each entry creates a Kargo project named `kargo-<app>` that watches an upstream image or chart, opens a **squash-merged PR** against this repo, then syncs Argo CD. The `promotion` type decides what gets edited:
 - `helmAppVersion` → `apps/<app>/Chart.yaml` `appVersion`
-- `helmChartVersion` → the upstream entry under `dependencies` in `apps/<app>/Chart.yaml`, plus `Chart.lock` (Kargo's `helm-update-chart` step). The subscription's `repoURL` and chart name must exactly match that dependency's `repository` and `name`.
+- `helmChartVersion` → the upstream entry under `dependencies` in `apps/<app>/Chart.yaml`, plus `Chart.lock` (Kargo's `helm-update-chart` step). The subscription's `repoURL` and chart name must exactly match that dependency's `repository` and `name`. This holds for OCI too (`repoURL: oci://<registry>`, without the chart name); the Warehouse template appends the chart name itself, since Kargo's OCI subscriptions point at the chart and omit `name`.
 - `helmImageTags` → image tags in `apps/<app>/values.yaml`
 
 Implications:

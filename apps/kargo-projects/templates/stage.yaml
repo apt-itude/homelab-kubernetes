@@ -54,7 +54,9 @@ spec:
       {{- $chartName := .helmChartVersion.chart | default ($warehouse.subscriptions.chart | keys | first) }}
       {{- $chartConfig := get $warehouse.subscriptions.chart $chartName }}
       {{- $repoURL := get $chartConfig "repoURL" }}
-        # repository and name must exactly match the dependency entry in the app's Chart.yaml.
+        # repository and name must exactly match the dependency entry in the app's Chart.yaml,
+        # while chartFrom must use the same repoURL as the Warehouse subscription (for OCI, the
+        # registry URL with the chart name appended).
         - uses: helm-update-chart
           as: update
           config:
@@ -63,7 +65,7 @@ spec:
             - repository: {{ $repoURL }}
               name: {{ $chartName }}
       {{- if $repoURL | hasPrefix "oci://" }}
-              version: ${{ "{{" }} chartFrom("{{ $repoURL }}/{{ $chartName }}", warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
+              version: ${{ "{{" }} chartFrom("{{ trimSuffix "/" $repoURL }}/{{ $chartName }}", warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
       {{- else }}
               version: ${{ "{{" }} chartFrom("{{ $repoURL }}", "{{ $chartName }}", warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
       {{- end }}
