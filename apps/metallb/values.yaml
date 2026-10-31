@@ -22,3 +22,7 @@ metallb:
       limits:
         cpu: 100m
         memory: 100Mi
+
+  # Only L2 advertisement is used, so the BGP backend (frr-k8s) is not deployed.
+  frrk8s:
+    enabled: false

@@ -431,7 +431,7 @@ service:
     enabled: true
     type: LoadBalancer
     annotations:
-      metallb.universe.tf/loadBalancerIPs: 192.168.1.212
+      metallb.io/loadBalancerIPs: 192.168.1.212
     ports:
       homekit-bridge:
         enabled: true
@@ -446,7 +446,7 @@ service:
     enabled: true
     type: LoadBalancer
     annotations:
-      metallb.universe.tf/loadBalancerIPs: 192.168.1.213
+      metallb.io/loadBalancerIPs: 192.168.1.213
     ports:
       lan-http:
         enabled: true

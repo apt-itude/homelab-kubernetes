@@ -6,7 +6,7 @@ unifi:
     main:
       type: LoadBalancer
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 192.168.1.211
+        metallb.io/loadBalancerIPs: 192.168.1.211
 
   ingress:
     main:
