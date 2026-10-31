@@ -54,19 +54,21 @@ spec:
       {{- $chartName := .helmChartVersion.chart | default ($warehouse.subscriptions.chart | keys | first) }}
       {{- $chartConfig := get $warehouse.subscriptions.chart $chartName }}
       {{- $repoURL := get $chartConfig "repoURL" }}
-        - uses: yaml-update
+        # repository and name must exactly match the dependency entry in the app's Chart.yaml.
+        - uses: helm-update-chart
           as: update
           config:
-            path: ./repo/apps/{{ $projectName }}/Chart.yaml
-            updates:
-            - key: version
-      {{- if $repoURL | hasPrefix "oci://" -}}
-              value: ${{ "{{" }} chartFrom("{{ $repoURL }}/{{ $chartName }}", warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
+            path: ./repo/apps/{{ $projectName }}
+            charts:
+            - repository: {{ $repoURL }}
+              name: {{ $chartName }}
+      {{- if $repoURL | hasPrefix "oci://" }}
+              version: ${{ "{{" }} chartFrom("{{ $repoURL }}/{{ $chartName }}", warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
       {{- else }}
-              value: ${{ "{{" }} chartFrom("{{ $repoURL }}", "{{ $chartName }}" , warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
+              version: ${{ "{{" }} chartFrom("{{ $repoURL }}", "{{ $chartName }}", warehouse("{{ $warehouseName }}")).Version {{ "}}" }}
       {{- end }}
     {{- else }}
-      {{- fail "promotion must contain helmAppVersion or helmImageTags" }}
+      {{- fail "promotion must contain exactly one of helmAppVersion, helmImageTags, or helmChartVersion" }}
     {{- end }}
 
         - uses: git-commit
