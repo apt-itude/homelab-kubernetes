@@ -74,6 +74,18 @@ projects:
     promotion:
       helmAppVersion: {}
 
+  kargo:
+    warehouses:
+      main:
+        subscriptions:
+          chart:
+            kargo:
+              repoURL: oci://ghcr.io/akuity/kargo-charts
+              semverConstraint: ^1.0.0
+              discoveryLimit: 5
+    promotion:
+      helmChartVersion: {}
+
   longhorn-system:
     warehouses:
       main:
