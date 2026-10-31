@@ -54,6 +54,9 @@ kube-prometheus-stack:
           secretName: prometheus-lucys-crib-cert-acme
 
   grafana:
+    admin:
+      existingSecret: grafana-admin-creds
+
     resources:
       requests:
         cpu: 50m
@@ -155,3 +158,16 @@ kube-prometheus-stack:
 
   kubeProxy:
     enabled: false
+
+external-secrets:
+  onepassword:
+    secrets:
+      grafana-admin-creds:
+        enabled: true
+        keys:
+          admin-user:
+            item: grafana-admin-creds
+            field: username
+          admin-password:
+            item: grafana-admin-creds
+            field: password
