@@ -19,9 +19,19 @@ spec:
       {{- end }}
     {{- end }}
     {{- range $chartName, $chartConfig := ($warehouse.subscriptions.chart | default dict) }}
+      {{- $repoURL := $chartConfig.repoURL | required "repoURL is required for chart subscription" }}
   - chart:
-      repoURL: {{ $chartConfig.repoURL | required "repoURL is required for chart subscription" }}
+      {{- /*
+      repoURL in values is the dependency's Chart.yaml `repository`. Kargo expects an OCI
+      subscription's repoURL to point at the chart itself and forbids `name`, whereas HTTP(S)
+      subscriptions take the repo URL plus `name`.
+      */}}
+      {{- if hasPrefix "oci://" $repoURL }}
+      repoURL: {{ trimSuffix "/" $repoURL }}/{{ $chartName }}
+      {{- else }}
+      repoURL: {{ $repoURL }}
       name: {{ $chartName }}
+      {{- end }}
       {{- with (omit $chartConfig "repoURL") }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
