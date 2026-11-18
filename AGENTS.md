@@ -47,5 +47,4 @@ Implications:
 ## Conventions
 - `main` is the default branch. Only automated Kargo promotion PRs are squash-merged (by the pipeline below); human PRs are merged normally.
 - Public hostnames are `<name>.lucyscrib.com`; TLS uses the `lucys-crib-acme` ClusterIssuer (Let's Encrypt DNS-01 via Cloudflare, defined in `apps/cert-manager/templates/`). External traffic enters through `apps/cloudflare-tunnel/values.yaml` (its ingress map), not per-app LoadBalancers.
-- `apps/test/` is the unmodified `helm create` scaffold (nginx) — don't copy it as a pattern.
 - Top-level `charts/` (shared) is not the same as a chart's own `charts/` subdir (vendored deps).
