@@ -2,6 +2,12 @@ unifi:
   image:
     tag: v9.4.19
 
+  env:
+    # Disables the JVM's AVX-512 Base64 decoder intrinsic, which is exploitable on affected JDKs
+    # (CVE-2026-114938, "Java4Shell"). -XX:UseAVX=2 would also work but the JVM rejects it on
+    # arm64, and this pod can schedule onto arm64 nodes.
+    JVM_EXTRA_OPTS: "-XX:-UseBASE64Intrinsics"
+
   service:
     main:
       type: LoadBalancer
